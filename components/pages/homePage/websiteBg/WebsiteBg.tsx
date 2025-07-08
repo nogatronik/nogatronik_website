@@ -1,6 +1,6 @@
 "use client";
 
-import React/*, { useRef }*/ from "react";
+import React /*, { useRef }*/ from "react";
 
 import ImageComp from "./comps/ImageComp";
 import TextComp from "./comps/TextComp";
@@ -28,8 +28,10 @@ const WebsiteBg = () => {
 
   return (
     <ContentLandAnim style="h-fit md:min-h-screen w-full max-w-7xl mx-auto p-5 flex items-center justify-center">
-      <ImageComp />
-      <TextComp />
+      <div className="flex flex-col md:flex-row gap-5 w-full h-full">
+        <ImageComp />
+        <TextComp />
+      </div>
     </ContentLandAnim>
     // <div
     //   ref={contentRef}
