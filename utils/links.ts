@@ -1,21 +1,25 @@
 import Dashboard from "@/components/global/navbar/navbarComps/userSidebar/userSidebarComps/Dashboard";
 import Favorites from "@/components/global/navbar/navbarComps/userSidebar/userSidebarComps/Favorites";
 import YourCart from "@/components/global/navbar/navbarComps/userSidebar/userSidebarComps/YourCart";
-// import { BsFillInfoSquareFill } from "react-icons/bs";
+import { BsFillInfoSquareFill } from "react-icons/bs";
 import {
   FaHome,
   FaHouseUser,
   FaShoppingBag,
   FaShoppingCart,
+  FaShippingFast,
+  FaHandshake,
 } from "react-icons/fa";
 import { HiIdentification } from "react-icons/hi";
 import {
+  MdAssignmentReturn,
   MdDashboard,
   MdFavorite,
-  MdHelpCenter,
   MdPayment,
+  MdPrivacyTip,
 } from "react-icons/md";
 import { PiAirplaneTakeoffFill } from "react-icons/pi";
+import { GoLaw } from "react-icons/go";
 import { RiLogoutBoxFill, RiShoppingBagFill } from "react-icons/ri";
 import {
   DashboardNavLinks,
@@ -49,11 +53,11 @@ export const NAVLINKS: NavLink[] = [
     icon: FaShoppingBag,
     text: "Shopping",
   },
-  // {
-  //   href: "/about",
-  //   icon: BsFillInfoSquareFill,
-  //   text: "About",
-  // },
+  {
+    href: "/about",
+    icon: BsFillInfoSquareFill,
+    text: "About",
+  },
 ];
 
 // Side nav links for shopping purposes
@@ -99,12 +103,6 @@ export const DASHBOARD_NAV: DashboardNavLinks[] = [
     href: "/user-account/payment-methods",
   },
   {
-    type: "static",
-    text: "Need Help?",
-    icon: MdHelpCenter,
-    href: "/need-help",
-  },
-  {
     type: "action",
     text: "Sign out",
     icon: RiLogoutBoxFill,
@@ -112,6 +110,34 @@ export const DASHBOARD_NAV: DashboardNavLinks[] = [
   },
 ];
 
+// Side panel help services links
+export const HELP_SERVICES_LINKS: NavLink[] = [
+  {
+    href: "/help-customer-service/shipping-delivery",
+    icon: FaShippingFast,
+    text: "Shipping & Delivery",
+  },
+  {
+    href: "/help-customer-service/return-policy",
+    icon: MdAssignmentReturn,
+    text: "Return Policy",
+  },
+  {
+    href: "/help-customer-service/privacy-policy",
+    icon: MdPrivacyTip,
+    text: "Privacy Policy",
+  },
+  {
+    href: "/help-customer-service/terms-of-service",
+    icon: FaHandshake,
+    text: "Terms of Service",
+  },
+  {
+    href: "/help-customer-service/code-of-conduct",
+    icon: GoLaw,
+    text: "Code of Conduct",
+  },
+];
 // Engineering sub menu
 export const SUBNAV: EngSubNav[] = [
   {

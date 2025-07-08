@@ -1,18 +1,19 @@
 "use client";
 
-import React, { useRef } from "react";
+import React/*, { useRef }*/ from "react";
 
-// import ImageComp from "./comps/ImageComp";
-// import TextComp from "./comps/TextComp";
-import ScrollIntoAnim from "@/components/animations/ScrollIntoAnim";
-import dynamic from "next/dynamic";
+import ImageComp from "./comps/ImageComp";
+import TextComp from "./comps/TextComp";
+// import ScrollIntoAnim from "@/components/animations/ScrollIntoAnim";
+// import dynamic from "next/dynamic";
+import ContentLandAnim from "@/components/animations/ContentLandAnim";
 
-const ImageComp = dynamic(() => import("./comps/ImageComp"), {
-  ssr: false,
-});
-const TextComp = dynamic(() => import("./comps/TextComp"), {
-  ssr: false,
-});
+// const ImageComp = dynamic(() => import("./comps/ImageComp"), {
+//   ssr: false,
+// });
+// const TextComp = dynamic(() => import("./comps/TextComp"), {
+//   ssr: false,
+// });
 
 /**
  *
@@ -23,22 +24,26 @@ const TextComp = dynamic(() => import("./comps/TextComp"), {
  */
 const WebsiteBg = () => {
   // Variables
-  const contentRef = useRef<HTMLDivElement>(null);
+  // const contentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      ref={contentRef}
-      id="website-background-container"
-      className="h-fit md:min-h-screen w-full max-w-7xl mx-auto p-5 flex items-center justify-center"
-    >
-      <ScrollIntoAnim
-        id="website-background-container"
-        customStyle="flex flex-col md:flex-row gap-5 w-full h-full"
-      >
-        <ImageComp />
-        <TextComp />
-      </ScrollIntoAnim>
-    </div>
+    <ContentLandAnim style="h-fit md:min-h-screen w-full max-w-7xl mx-auto p-5 flex items-center justify-center">
+      <ImageComp />
+      <TextComp />
+    </ContentLandAnim>
+    // <div
+    //   ref={contentRef}
+    //   id="website-background-container"
+    //   className="h-fit md:min-h-screen w-full max-w-7xl mx-auto p-5 flex items-center justify-center"
+    // >
+    //   <ScrollIntoAnim
+    //     id="website-background-container"
+    //     customStyle="flex flex-col md:flex-row gap-5 w-full h-full"
+    //   >
+    //     <ImageComp />
+    //     <TextComp />
+    //   </ScrollIntoAnim>
+    // </div>
   );
 };
 

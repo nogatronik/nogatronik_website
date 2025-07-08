@@ -1,4 +1,4 @@
-import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaYoutube } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
 import { SocialLink } from "@/lib/types";
@@ -10,20 +10,14 @@ export const SOCIALS: SocialLink[] = [
   {
     icon: FaFacebook,
     text: "Facebook",
-    href: "#",
-    disabled: true,
+    href: "https://www.facebook.com/people/Nogatronik-Engineering/61576808046151/",
+    disabled: false,
   },
   {
     icon: RiInstagramFill,
     text: "Instagram",
-    href: "#",
-    disabled: true,
-  },
-  {
-    icon: FaLinkedin,
-    text: "LinkedIn",
-    href: "#",
-    disabled: true,
+    href: "https://www.instagram.com/nogatronikeng/",
+    disabled: false,
   },
   {
     icon: FaXTwitter,

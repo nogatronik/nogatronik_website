@@ -39,10 +39,10 @@ const TextComp = () => {
 
       <ContentLandAnim delay={4}>
         <button
-          onClick={() => lenis?.scrollTo("#website-background-container")}
+          onClick={() => lenis?.scrollTo("#website-services", { offset: -125 })}
           className="button"
         >
-          <small>learn more</small>
+          <small className="uppercase">learn more</small>
           <FaArrowDown className="icon" />
         </button>
       </ContentLandAnim>

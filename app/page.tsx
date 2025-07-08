@@ -1,7 +1,7 @@
 import Hero from "@/components/pages/homePage/hero/Hero";
 import PlaneScene from "@/components/pages/homePage/planeScene/PlaneScene";
-import WebsiteBg from "@/components/pages/homePage/websiteBg/WebsiteBg";
-import Principles from "@/components/pages/homePage/principals/Principles";
+// import WebsiteBg from "@/components/pages/homePage/websiteBg/WebsiteBg";
+// import Principles from "@/components/pages/homePage/principals/Principles";
 import ContentSummary from "@/components/pages/homePage/contentSummary/ContentSummary";
 
 /**
@@ -15,8 +15,8 @@ export default function Home() {
     <main className=" flex-1 flex flex-col overflow-hidden">
       <Hero />
       <PlaneScene />
-      <WebsiteBg />
-      <Principles />
+      {/* <WebsiteBg />
+      <Principles /> */}
       <ContentSummary />
     </main>
   );

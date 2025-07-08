@@ -22,6 +22,7 @@ const ContentSummary = () => {
   return (
     <ScrollIntoAnim
       ref={contentRef}
+      id="website-services"
       customStyle="mx-auto flex flex-col w-full gap-10 max-w-7xl my-20 p-5"
     >
       <h2 className="mx-auto text-primary">
@@ -47,7 +48,7 @@ const ContentSummary = () => {
                 className="drop-shadow-sm"
               />
             </div>
-            <p className="font-bold">{comp.title}</p>
+            <p className="font-bold uppercase text-primary drop-shadow-md">{comp.title}</p>
             <p> {comp.explanation} </p>
             <Link
               href={comp.link}

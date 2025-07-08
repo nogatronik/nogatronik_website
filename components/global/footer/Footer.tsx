@@ -66,17 +66,26 @@ const Footer = () => {
             <div className="flex gap-10">
               <div className="flex flex-col gap-2 ">
                 <h2 className="text-primary">Get Help</h2>
-                <Link href={"#"} className="group">
+                <Link
+                  href={"/help-customer-service/shipping-delivery"}
+                  className="group"
+                >
                   <small className="link-child anim-transition">
                     Shipping & Delivery
                   </small>
                 </Link>
-                <Link href={"#"} className="group">
+                <Link
+                  href={"/help-customer-service/return-policy"}
+                  className="group"
+                >
                   <small className="link-child anim-transition">
                     Return Policy
                   </small>
                 </Link>
-                <Link href={"#"} className="group">
+                <Link
+                  href={"/help-customer-service/contact-us"}
+                  className="group"
+                >
                   <small className="link-child anim-transition">
                     Contact Us
                   </small>
@@ -110,17 +119,26 @@ const Footer = () => {
             </small>
 
             <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-5">
-              <Link href={"#"} className="group w-fit">
+              <Link
+                href={"/help-customer-service/privacy-policy"}
+                className="group w-fit"
+              >
                 <small className="link-child anim-transition">
                   Privacy Policy
                 </small>
               </Link>
-              <Link href={"#"} className="group w-fit">
+              <Link
+                href={"/help-customer-service/terms-of-service"}
+                className="group w-fit"
+              >
                 <small className="link-child anim-transition">
                   Terms of Service
                 </small>
               </Link>
-              <Link href={"#"} className="group w-fit">
+              <Link
+                href={"/help-customer-service/code-of-conduct"}
+                className="group w-fit"
+              >
                 <small className="link-child anim-transition">
                   Code of Conduct
                 </small>
