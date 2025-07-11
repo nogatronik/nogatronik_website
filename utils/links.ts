@@ -118,9 +118,9 @@ export const HELP_SERVICES_LINKS: NavLink[] = [
     text: "Shipping & Delivery",
   },
   {
-    href: "/help-customer-service/return-policy",
+    href: "/help-customer-service/return-refund-policy",
     icon: MdAssignmentReturn,
-    text: "Return Policy",
+    text: "Return & Refund Policy",
   },
   {
     href: "/help-customer-service/privacy-policy",

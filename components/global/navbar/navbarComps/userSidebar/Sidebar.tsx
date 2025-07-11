@@ -30,6 +30,9 @@ const Sidebar = ({ setComp }: Props) => {
   const [open, setOpen] = useState(false);
   const width = useScreenWidth();
   const pathname = usePathname();
+  const isActive = (href: string) => {
+    return pathname.split("/").pop() === href.split("/").pop();
+  };
 
   // Listens for a change in width and/or pathname to close the side panel
   useEffect(() => {
@@ -37,6 +40,8 @@ const Sidebar = ({ setComp }: Props) => {
     if (open) setOpen(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, pathname]);
+
+  console.log(pathname.split("/").filter(Boolean).at(-2) === "user-account");
 
   return (
     <>
@@ -66,16 +71,12 @@ const Sidebar = ({ setComp }: Props) => {
                 >
                   <link.icon
                     className={`icon group-hover:text-primary anim-transition ${
-                      pathname.split("/").slice(0, 2).join("/") ===
-                        link.href.split("/").slice(0, 2).join("/") &&
-                      "text-primary"
+                      isActive(link.href) && "text-primary"
                     }`}
                   />
                   <small
                     className={`text-sm group-hover:text-primary anim-transition ${
-                      pathname.split("/").slice(0, 2).join("/") ===
-                        link.href.split("/").slice(0, 2).join("/") &&
-                      "text-primary"
+                      isActive(link.href) && "text-primary"
                     }`}
                   >
                     {link.text}
@@ -104,8 +105,22 @@ const Sidebar = ({ setComp }: Props) => {
                           key={index}
                           className="group cursor-pointer flex items-center gap-5"
                         >
-                          <userOption.icon className="icon group-hover:text-primary anim-transition" />
-                          <small className="text-sm group-hover:text-primary anim-transition">
+                          <userOption.icon
+                            className={`icon group-hover:text-primary anim-transition ${
+                              pathname.split("/").filter(Boolean).at(-2) ===
+                                "user-account" &&
+                              userOption.text === "Account" &&
+                              "text-primary"
+                            }`}
+                          />
+                          <small
+                            className={`text-sm group-hover:text-primary anim-transition ${
+                              pathname.split("/").filter(Boolean).at(-2) ===
+                                "user-account" &&
+                              userOption.text === "Account" &&
+                              "text-primary"
+                            }`}
+                          >
                             {userOption.text}
                           </small>
                         </button>

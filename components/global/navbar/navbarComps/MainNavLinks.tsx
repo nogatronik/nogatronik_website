@@ -30,6 +30,9 @@ const MainNavLinks = ({ setComp }: Props) => {
   // Variables
   const { data: session } = useSession();
   const pathname = usePathname();
+  const isActive = (href: string) => {
+    return pathname.split("/").pop() === href.split("/").pop();
+  };
   const textVariants = {
     hidden: { width: 0, opacity: 0 },
     visible: { width: "auto", opacity: 1 },
@@ -48,15 +51,15 @@ const MainNavLinks = ({ setComp }: Props) => {
               <motion.span>
                 <link.icon
                   className={`icon link-child ${
-                    pathname.split("/").slice(0, 2).join("/") ===
-                      link.href.split("/").slice(0, 2).join("/") &&
-                    "text-primary"
+                    isActive(link.href) && "text-primary"
                   }`}
                 />
               </motion.span>
 
               <motion.small
-                className="link-child overflow-hidden whitespace-nowrap"
+                className={`link-child overflow-hidden whitespace-nowrap ${
+                  isActive(link.href) && "text-primary"
+                }`}
                 variants={textVariants}
               >
                 {link.text}

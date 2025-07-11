@@ -75,11 +75,11 @@ const Footer = () => {
                   </small>
                 </Link>
                 <Link
-                  href={"/help-customer-service/return-policy"}
+                  href={"/help-customer-service/return-refund-policy"}
                   className="group"
                 >
                   <small className="link-child anim-transition">
-                    Return Policy
+                    Return & Refund Policy
                   </small>
                 </Link>
                 <Link

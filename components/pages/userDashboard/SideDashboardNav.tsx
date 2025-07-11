@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { DASHBOARD_NAV } from "@/utils/links";
 import { signOut } from "next-auth/react";
@@ -14,6 +15,11 @@ import ContentLandAnim from "@/components/animations/ContentLandAnim";
  * @returns JSX
  */
 const SideDashboardNav = () => {
+  const pathname = usePathname();
+  const isActive = (href: string) => {
+    return pathname.split("/").pop() === href.split("/").pop();
+  };
+
   return (
     <div className="flex flex-col min-w-[250px] gap-5 p-5">
       <ContentLandAnim>
@@ -36,8 +42,16 @@ const SideDashboardNav = () => {
                 className="group flex items-center gap-5 py-5 px-2 border-b-2 border-secondary/25 flex-1"
                 key={index}
               >
-                <option.icon className="icon group-hover:text-primary anim-transition" />
-                <small className="group-hover:text-primary anim-transition">
+                <option.icon
+                  className={`icon group-hover:text-primary anim-transition  ${
+                    isActive(option.href!) && "text-primary"
+                  }`}
+                />
+                <small
+                  className={`group-hover:text-primary anim-transition  ${
+                    isActive(option.href!) && "text-primary"
+                  }`}
+                >
                   {option.text}
                 </small>
               </Link>
