@@ -41,8 +41,6 @@ const Sidebar = ({ setComp }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [width, pathname]);
 
-  console.log(pathname.split("/").filter(Boolean).at(-2) === "user-account");
-
   return (
     <>
       <AnimatePresence mode="wait">

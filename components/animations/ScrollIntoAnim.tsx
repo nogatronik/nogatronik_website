@@ -37,7 +37,7 @@ const ScrollIntoAnim = forwardRef<HTMLDivElement, Props>(
       }
     }, [ref]);
 
-    const isInView = useInView(innerRef, { amount: 0.45 });
+    const isInView = useInView(innerRef, { amount: 0.25 });
     return (
       <motion.div
         id={id}
