@@ -1,13 +1,14 @@
 "use client";
 
 import { signIn } from "@/node_modules/next-auth/react";
-import { redirect, useParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useState, FormEvent } from "react";
 
 import { RiLoginBoxFill } from "react-icons/ri";
 import { LuOctagonAlert } from "react-icons/lu";
 import { MdEmail } from "react-icons/md";
 import { FaUnlockAlt } from "react-icons/fa";
+import Link from "next/link";
 
 /**
  *
@@ -17,12 +18,12 @@ import { FaUnlockAlt } from "react-icons/fa";
  */
 const LoginForm = () => {
   // Variables
-  const searchParams = useParams();
-  const verified = searchParams.verified;
+  const searchParams = useSearchParams();
+  const verified = searchParams.get("verified");
+  const errorCallback = searchParams.get("error");
   // UseState
   const [error, setError] = useState("");
   const [isPending, setIsPending] = useState(false);
-
   /**
    *
    * param: event FormEvent
@@ -72,7 +73,7 @@ const LoginForm = () => {
             <small>Email:</small>
           </label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="email"
             placeholder="example@email.com"
@@ -93,6 +94,9 @@ const LoginForm = () => {
             onChange={() => setError("")}
             required
           />
+          <Link href={'/login/forgot-password'} className="flex justify-center">
+            <small>forgot password</small>
+          </Link>
         </div>
         {isPending ? (
           <small>pending...</small>
@@ -108,6 +112,15 @@ const LoginForm = () => {
           <LuOctagonAlert className="icon text-secondary" />
           <small className="text-secondary text-center">
             Your email has been successfully verified. You can now log in.
+          </small>
+        </div>
+      )}
+      {errorCallback && (
+        <div className="flex items-center gap-2 mx-auto p-2 border-2 border-primary rounded-md">
+          <LuOctagonAlert className="icon text-secondary" />
+          <small className="text-secondary">
+            An account with this email already exists. Please sign in using your
+            email and password.
           </small>
         </div>
       )}

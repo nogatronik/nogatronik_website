@@ -1,4 +1,8 @@
-import { UserDocument, VerificationTokenDocument } from "@/lib/types";
+import {
+  ResetPwdTokenDocument,
+  UserDocument,
+  VerificationTokenDocument,
+} from "@/lib/types";
 import mongoose, { Schema, model } from "mongoose";
 
 // User schema
@@ -64,6 +68,25 @@ const VerificationTokenSchema = new Schema<VerificationTokenDocument>({
   expires: {
     type: Date,
     required: true,
+    index: { expires: 0 },
+  },
+});
+
+const ResetPwdTokenSchema = new Schema<ResetPwdTokenDocument>({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  token: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  expires: {
+    type: Date,
+    required: true,
+    index: { expires: 0 },
   },
 });
 
@@ -74,5 +97,11 @@ const VerificationToken =
     "VerificationToken",
     VerificationTokenSchema
   );
+const ResetPwdToken =
+  mongoose.models?.ResetPwdToken ||
+  mongoose.model<VerificationTokenDocument>(
+    "ResetPwdToken",
+    ResetPwdTokenSchema
+  );
 
-export { User, VerificationToken };
+export { User, VerificationToken, ResetPwdToken };

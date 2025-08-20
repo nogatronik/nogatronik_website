@@ -101,6 +101,12 @@ export interface VerificationTokenDocument extends Document {
   expires: Date;
 }
 
+export interface ResetPwdTokenDocument extends Document {
+  userId: mongoose.Types.ObjectId;
+  token: string;
+  expires: Date;
+}
+
 export interface HomeAboutLink {
   component: React.ComponentType;
   key: string;

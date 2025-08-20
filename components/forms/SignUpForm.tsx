@@ -50,7 +50,7 @@ export const SignUpForm = () => {
       setSuccess("Please Verify email and login");
       setTimeout(() => {
         router.push("/login");
-      }, 5000);
+      }, 4500);
     }
   };
 
@@ -116,8 +116,6 @@ export const SignUpForm = () => {
             onChange={() => setError("")}
           />
         </div>
-
-        <div className="flex justify-center mt-4">{/* reCaptcha div */}</div>
 
         <button className="button mx-auto">
           <RiUserAddFill className="icon" />

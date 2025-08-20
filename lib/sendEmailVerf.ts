@@ -1,13 +1,11 @@
 import nodemailer from "nodemailer";
-// import path from "path";
-// import fs from "fs";
 
 /**
  *
  * @param name: string
  * @param verificationUrl: string
  *
- * The function gets the user's name and verificationUrl to replace this values from the
+ * The function gets the user's name and verificationUrl to replace these values from the
  * verification_email.html to send to the user's email.
  *
  * @returns
@@ -21,12 +19,6 @@ const getVerificationEmailHtml = async ({
   verificationUrl: string;
 }) => {
   try {
-    // Variables
-    // const templatePath = path.join(
-    //   process.cwd(),
-    //   "public/emailTemplates/verification_email.html"
-    // );
-    // let html = fs.readFileSync(templatePath, "utf-8");
     const res = await fetch(
       `${process.env.VERIFICATION_URL_DOMAIN}/emailTemplates/verification_email.html`
     );

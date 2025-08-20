@@ -66,7 +66,7 @@ export const authOptions: NextAuthOptions = {
           }
 
           // returning true and successful authentication flow
-          return true;
+          return "/login?error=EmailExists";
         }
         // Handles when user uses other providers (to be determined)
 

@@ -5,7 +5,6 @@ import { User } from "@/models/User";
 export const getAccountDetails = async (userID: string) => {
   const data = unstable_cache(
     async (userID: string) => {
-      console.log("call from cache function");
       try {
         await connectDB();
         const userFound = await User.findOne({ _id: userID }).select(

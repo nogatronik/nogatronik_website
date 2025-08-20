@@ -138,6 +138,7 @@ export const HELP_SERVICES_LINKS: NavLink[] = [
     text: "Code of Conduct",
   },
 ];
+
 // Engineering sub menu
 export const SUBNAV: EngSubNav[] = [
   {
@@ -163,6 +164,7 @@ export const SUBNAV: EngSubNav[] = [
   },
 ];
 
+// About links
 export const ABOUT_LINKS: HomeAboutLink[] = [
   { component: IdeaDesc, key: "idea" },
   { component: MAMention, key: "ma_mention" },
