@@ -7,14 +7,9 @@ import ContentLandAnim from "@/components/animations/ContentLandAnim";
 import Link from "next/link";
 import CreateNewPwdForm from "@/components/forms/CreateNewPwdForm";
 
-const ResetPwdPage = async ({
-  searchParams,
-}: {
-  searchParams?: Record<string, string | string[] | undefined>;
-}) => {
-  const token = Array.isArray(searchParams?.token)
-    ? searchParams?.token[0]
-    : searchParams?.token;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ResetPwdPage = async ({ searchParams }: any) => {
+  const token = searchParams?.token as string | undefined;
 
   const { valid } = await validateResetToken(token);
 
