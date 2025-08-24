@@ -19,6 +19,7 @@ import { getCaptchaToken } from "@/utils/captcha";
 export const SignUpForm = () => {
   // Variables
   const router = useRouter();
+  const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -31,6 +32,7 @@ export const SignUpForm = () => {
    * return: null | redirect to login page
    */
   const handleSubmit = async (formData: FormData) => {
+    setIsPending(true);
     const token = await getCaptchaToken();
 
     // calling server action, register, to save new user in the database
@@ -47,6 +49,7 @@ export const SignUpForm = () => {
       setError(r.error);
       return;
     } else {
+      setIsPending(false);
       setSuccess("Please Verify email and login");
       setTimeout(() => {
         router.push("/login");
@@ -116,11 +119,14 @@ export const SignUpForm = () => {
             onChange={() => setError("")}
           />
         </div>
-
-        <button className="button mx-auto">
-          <RiUserAddFill className="icon" />
-          <small>sign-up</small>
-        </button>
+        {isPending ? (
+          <small>pending...</small>
+        ) : (
+          <button className="button mx-auto">
+            <RiUserAddFill className="icon" />
+            <small>sign-up</small>
+          </button>
+        )}
       </form>
 
       {success && (

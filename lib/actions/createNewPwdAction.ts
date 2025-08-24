@@ -66,8 +66,7 @@ export const createNewPwd = async (values: RegisterFormData) => {
   try {
     // Connect to DB
     await connectDB();
-    console.log(userId);
-    // Variables (creates user)
+    // Variables
     const userFound = await User.findOne({ _id: userId });
     if (!userFound) {
       return {

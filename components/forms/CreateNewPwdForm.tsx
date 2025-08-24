@@ -15,6 +15,7 @@ interface Props {
 const CreateNewPwdForm = ({ token }: Props) => {
   const router = useRouter();
   const [error, setError] = useState("");
+  const [isPending, setIsPending] = useState(false);
   const [success, setSuccess] = useState("");
 
   /**
@@ -26,6 +27,7 @@ const CreateNewPwdForm = ({ token }: Props) => {
    * return: null | redirect to login page
    */
   const handleSubmit = async (formData: FormData) => {
+    setIsPending(true);
     const recapToken = await getCaptchaToken();
 
     // calling createNewPwd action, creates a new password for the user
@@ -40,6 +42,7 @@ const CreateNewPwdForm = ({ token }: Props) => {
       setError(r.error);
       return;
     } else {
+      setIsPending(false);
       setSuccess("Password successfully changed");
       setTimeout(() => {
         router.push("/login");
@@ -78,11 +81,15 @@ const CreateNewPwdForm = ({ token }: Props) => {
             onChange={() => setError("")}
           />
         </div>
-
-        <button className="button mx-auto">
+        {isPending ? (
+                  <small>pending...</small>
+                ) : (
+                  <button className="button mx-auto">
           <FaPlus className="icon" />
           <small>create new password</small>
         </button>
+                )}
+        
       </form>
       {success && (
         <div className="flex items-center gap-2 mx-auto border-2 border-onFailure p-2 rounded-md">

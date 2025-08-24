@@ -1,21 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import { getCaptchaToken } from "@/utils/captcha";
+import { sendResetPwdEmail } from "@/lib/actions/resetPwdAction";
 
 import { MdEmail } from "react-icons/md";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { sendResetPwdEmail } from "@/lib/actions/resetPwdAction";
+import { LuOctagonAlert } from "react-icons/lu";
 
 const ResetPwdForm = () => {
+  const router = useRouter();
+  const [error, setError] = useState("");
+  const [isPending, setIsPending] = useState(false);
+  const [success, setSuccess] = useState("");
+
   const handleResetPwd = async (formData: FormData) => {
+    setIsPending(true);
     const token = await getCaptchaToken();
 
     const r = await sendResetPwdEmail({
       email: formData.get("email") as string,
       token,
     });
-    console.log(r);
+    if (r?.error) {
+      setError(r.error);
+      return;
+    } else {
+      setIsPending(false);
+      setSuccess("Please Verify email and login");
+      setTimeout(() => {
+        router.push("/login");
+      }, 4500);
+    }
   };
 
   return (
@@ -33,10 +51,26 @@ const ResetPwdForm = () => {
           required
         />
       </div>
-      <button className="button">
-        <RiSendPlaneFill className="icon" />
-        <small>send</small>
-      </button>
+      {isPending ? (
+        <small>pending...</small>
+      ) : (
+        <button className="button">
+          <RiSendPlaneFill className="icon" />
+          <small>send</small>
+        </button>
+      )}
+      {success && (
+        <div className="flex items-center gap-2 mx-auto border-2 border-onFailure p-2 rounded-md">
+          <LuOctagonAlert className="icon text-onFailure" />
+          <small className="text-onFailure">{success}</small>
+        </div>
+      )}
+      {error && (
+        <div className="flex items-center gap-2 mx-auto p-2 border-2 border-primary rounded-md">
+          <LuOctagonAlert className="icon text-secondary" />
+          <small className="text-secondary">{error}</small>
+        </div>
+      )}
     </form>
   );
 };
