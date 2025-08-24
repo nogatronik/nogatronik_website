@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
 import LoginProviders from "@/components/authentication/loginComps/LoginProviders.";
@@ -28,8 +28,9 @@ const LoginPage = async () => {
             className="w-[200px] h-auto"
           />
         </div>
-
-        <LoginForm />
+        <Suspense fallback={<p>Loading...</p>}>
+          <LoginForm />
+        </Suspense>
         <hr className="border-t-2 border-secondary/50" />
 
         <LoginProviders />
