@@ -7,14 +7,14 @@ import ContentLandAnim from "@/components/animations/ContentLandAnim";
 import Link from "next/link";
 import CreateNewPwdForm from "@/components/forms/CreateNewPwdForm";
 
-interface SearchParams {
-  searchParams?: {
-    token?: string;
-  };
-}
-
-const ResetPwdPage = async ({ searchParams }: SearchParams) => {
-  const token = searchParams?.token;
+const ResetPwdPage = async ({
+  searchParams,
+}: {
+  searchParams?: Record<string, string | string[] | undefined>;
+}) => {
+  const token = Array.isArray(searchParams?.token)
+    ? searchParams?.token[0]
+    : searchParams?.token;
 
   const { valid } = await validateResetToken(token);
 
