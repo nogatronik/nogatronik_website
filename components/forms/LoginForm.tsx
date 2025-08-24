@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "@/node_modules/next-auth/react";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 import { useState, FormEvent } from "react";
 
 import { RiLoginBoxFill } from "react-icons/ri";
@@ -18,9 +18,10 @@ import Link from "next/link";
  */
 const LoginForm = () => {
   // Variables
-  const searchParams = useSearchParams();
-  const verified = searchParams.get("verified");
-  const errorCallback = searchParams.get("error");
+  const searchParams = useParams();
+  const { verified, error: errorCallback } = searchParams;
+  // const verified = searchParams.get("verified");
+  // const errorCallback = searchParams.get("error");
   // UseState
   const [error, setError] = useState("");
   const [isPending, setIsPending] = useState(false);
@@ -94,7 +95,7 @@ const LoginForm = () => {
             onChange={() => setError("")}
             required
           />
-          <Link href={'/login/forgot-password'} className="flex justify-center">
+          <Link href={"/login/forgot-password"} className="flex justify-center">
             <small>forgot password</small>
           </Link>
         </div>
