@@ -5,8 +5,14 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
   const { pathname } = req.nextUrl;
-
-  if (!token && pathname.startsWith("/user-account"))
+  const protectedRoutes = ["/user-account", "/create-request"];
+  console.log(pathname);
+  if (
+    !token &&
+    protectedRoutes.some(
+      (path) => pathname.startsWith(path) || pathname.includes(path)
+    )
+  )
     return NextResponse.redirect(new URL("/", req.url));
 
   // Prevent signed-in users from accessing /login or /signup
@@ -18,5 +24,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/login", "/signup", "/user-account/:path*"], // match only login and signup routes
+  matcher: ["/login", "/signup", "/user-account/:path*", "/engineering/:path*"],
 };

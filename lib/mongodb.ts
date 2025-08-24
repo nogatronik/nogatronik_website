@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import mongoose from "mongoose";
+import mongoose, {Connection} from "mongoose";
 
 // Retrieves mongoDB uri
 const MONGODB_URI = process.env.MONGODB_URI!;
@@ -9,25 +9,25 @@ if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable");
 }
 
-// cache connection to mongoDB
-const cached = (global as any).mongoose || { conn: null, promise: null };
+interface Cached {
+  conn: Connection | null;
+  promise: Promise<Connection> | null;
+}
 
-/*
-Handles connection to mongoDB. It determines if there a cached connection or 
-if a new one needs to be created. 
-*/
-export async function connectDB() {
-  // checks and returns cached connection
+let cached: Cached = (global as any).mongoose;
+
+if (!cached) {
+  cached = { conn: null, promise: null };
+  (global as any).mongoose = cached;
+}
+
+export async function connectDB(): Promise<Connection> {
   if (cached.conn) return cached.conn;
 
-  // if cached not present, create new connection
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI as string);
+    cached.promise = mongoose.connect(MONGODB_URI).then((m) => m.connection);
   }
 
-  // return connection
   cached.conn = await cached.promise;
-  (global as any).mongoose = cached;
-
   return cached.conn;
 }

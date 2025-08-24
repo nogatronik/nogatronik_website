@@ -26,10 +26,10 @@ const SendRequest = async () => {
         className="drop-shadow-md w-[250px] md:w-[350px] h-auto"
       />
       {session ? (
-        <button className="button">
+        <Link href={"/engineering/repairs/create-request"} className="button">
           <IoMdCreate className="icon" />
-          <small>create request</small>
-        </button>
+          <small>start request</small>
+        </Link>
       ) : (
         <>
           <p>In order to send a request, you need to login</p>

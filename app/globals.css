@@ -51,7 +51,7 @@
   }
 
   textarea {
-    @apply outline-none text-secondary font-[family-name:var(--font-roboto-slab)] resize-none placeholder:text-secondary/75 bg-transparent;
+    @apply outline-none text-secondary font-[family-name:var(--font-roboto-slab)] resize-none placeholder:text-secondary/75 bg-transparent border-[1px] border-secondary/50;
   }
 }
 
@@ -114,6 +114,10 @@
 
   .date-picker {
     @apply w-full min-h-[42px] p-2 border-[1px] bg-extra/75 border-secondary/50 outline-none shadow-onRest text-secondary placeholder:text-secondary/55 hover:shadow-onHover hover:bg-accent/75 active:bg-accent/75 active:shadow-onHover focus:bg-accent/75 focus:shadow-onHover transition-all duration-300 ease-in-out;
+  }
+
+  .upload-box {
+    @apply w-full h-48 border-2 border-dashed border-secondary/50 rounded-lg flex items-center justify-center cursor-pointer hover:border-secondary transition-all duration-300 ease-in-out
   }
 }
 
