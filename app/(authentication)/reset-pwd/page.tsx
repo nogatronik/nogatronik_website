@@ -7,11 +7,13 @@ import ContentLandAnim from "@/components/animations/ContentLandAnim";
 import Link from "next/link";
 import CreateNewPwdForm from "@/components/forms/CreateNewPwdForm";
 
-const ResetPwdPage = async ({
-  searchParams,
-}: {
-  searchParams?: { token?: string };
-}) => {
+interface SearchParams {
+  searchParams?: {
+    token?: string;
+  };
+}
+
+const ResetPwdPage = async ({ searchParams }: SearchParams) => {
   const token = searchParams?.token;
 
   const { valid } = await validateResetToken(token);
