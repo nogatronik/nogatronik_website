@@ -1,7 +1,7 @@
 import { ResetPwdToken } from "@/models/User";
 import { connectDB } from "../mongodb";
 
-export const validateResetToken = async (token: string | null) => {
+export const validateResetToken = async (token: string | undefined) => {
   try {
     if (!token) return { valid: false, userId: null };
     // Connect to DB

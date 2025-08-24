@@ -9,7 +9,7 @@ import { LuOctagonAlert } from "react-icons/lu";
 import { createNewPwd } from "@/lib/actions/createNewPwdAction";
 
 interface Props {
-  token: string | null;
+  token: string | undefined;
 }
 
 const CreateNewPwdForm = ({ token }: Props) => {

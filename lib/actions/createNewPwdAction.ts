@@ -8,7 +8,7 @@ import { validateResetToken } from "./validateResetTokenAction";
 interface RegisterFormData {
   password: string;
   recapToken?: string | null;
-  token?: string | null;
+  token?: string | undefined;
 }
 
 /**

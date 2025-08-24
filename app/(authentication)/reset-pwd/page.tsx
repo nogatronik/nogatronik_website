@@ -10,10 +10,11 @@ import CreateNewPwdForm from "@/components/forms/CreateNewPwdForm";
 const ResetPwdPage = async ({
   searchParams,
 }: {
-  searchParams: { token: string | null };
+  searchParams?: { token?: string };
 }) => {
-  const { token } = await searchParams;
-  const {valid} = await validateResetToken(token);
+  const token = searchParams?.token;
+
+  const { valid } = await validateResetToken(token);
 
   return (
     <main className="min-h-[calc(100vh-105px)] w-full max-w-7xl mx-auto p-5 flex flex-col items-center justify-center">
