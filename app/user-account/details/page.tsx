@@ -7,8 +7,8 @@ import { CustomSession } from "@/lib/types";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
 import { getAccountDetails } from "@/lib/getData/accountDetails";
-import UpdateUserInfo from "@/components/pages/userDashboard/userDetailsPage/UpdateUserInfo";
-import UpdateAccInfo from "@/components/pages/userDashboard/userDetailsPage/UpdateAccInfo";
+import UpdateUserInfo from "@/components/pages/userDashboardPage/userDetailsPage/UpdateUserInfo";
+import UpdateAccInfo from "@/components/pages/userDashboardPage/userDetailsPage/UpdateAccInfo";
 
 /**
  *

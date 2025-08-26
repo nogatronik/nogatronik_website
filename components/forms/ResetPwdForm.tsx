@@ -29,7 +29,7 @@ const ResetPwdForm = () => {
       return;
     } else {
       setIsPending(false);
-      setSuccess("Please Verify email and login");
+      setSuccess("Please Verify email and create new password");
       setTimeout(() => {
         router.push("/login");
       }, 4500);
@@ -56,7 +56,7 @@ const ResetPwdForm = () => {
       ) : (
         <button className="button">
           <RiSendPlaneFill className="icon" />
-          <small>send</small>
+          <small>Send</small>
         </button>
       )}
       {success && (

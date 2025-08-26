@@ -40,11 +40,11 @@ const ArticleDiscReplyForm = ({ setReplyingTo }: Props) => {
       <div className="flex items-center justify-end gap-5 ">
         <button onClick={() => setReplyingTo(null)} className="group button">
           <FaTrash className="icon" />
-          <small className="button-onFailure-child">cancel</small>
+          <small className="button-onFailure-child">Cancel</small>
         </button>
         <button className="group button">
           <BsFillSendFill className="icon" />
-          <small className="button-onSuccess-child">comment</small>
+          <small className="button-onSuccess-child">Comment</small>
         </button>
       </div>
     </motion.div>

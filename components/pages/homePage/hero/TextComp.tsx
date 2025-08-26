@@ -42,7 +42,7 @@ const TextComp = () => {
           onClick={() => lenis?.scrollTo("#website-services", { offset: -125 })}
           className="button"
         >
-          <small className="uppercase">learn more</small>
+          <small>Learn more</small>
           <FaArrowDown className="icon" />
         </button>
       </ContentLandAnim>

@@ -28,14 +28,14 @@ const SendRequest = async () => {
       {session ? (
         <Link href={"/engineering/repairs/create-request"} className="button">
           <IoMdCreate className="icon" />
-          <small>start request</small>
+          <small>Start request</small>
         </Link>
       ) : (
         <>
           <p>In order to send a request, you need to login</p>
           <Link href={"/login"} className="button">
             <RiLoginBoxFill className="icon" />
-            <small>login</small>
+            <small>Login</small>
           </Link>
         </>
       )}

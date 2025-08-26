@@ -31,7 +31,7 @@ const MainNavLinks = ({ setComp }: Props) => {
   const { data: session } = useSession();
   const pathname = usePathname();
   const isActive = (href: string) => {
-    return pathname.split("/").pop() === href.split("/").pop();
+    return pathname.split("/")[1] === href.split("/").pop();
   };
   const textVariants = {
     hidden: { width: 0, opacity: 0 },
@@ -83,7 +83,7 @@ const MainNavLinks = ({ setComp }: Props) => {
             className="button"
           >
             <RiLogoutBoxFill className="icon" />
-            <small>sign out</small>
+            <small>Sign out</small>
           </motion.button>
         )}
       </AnimatePresence>

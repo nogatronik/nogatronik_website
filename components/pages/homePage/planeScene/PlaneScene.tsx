@@ -78,7 +78,7 @@ const PlaneScene = () => {
         onClick={() => setOpenCredit(true)}
         className="group w-fit button absolute top-5 right-5"
       >
-        <small className="button-child">model credit</small>
+        <small className="button-child">Model</small>
       </button>
 
       <AnimatePresence mode="popLayout">

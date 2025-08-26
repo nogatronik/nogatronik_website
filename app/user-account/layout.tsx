@@ -1,6 +1,6 @@
 import React from "react";
 
-import SideDashboardNav from "@/components/pages/userDashboard/SideDashboardNav";
+import SideDashboardNav from "@/components/pages/userDashboardPage/SideDashboardNav";
 
 interface Props {
   children: React.ReactNode;

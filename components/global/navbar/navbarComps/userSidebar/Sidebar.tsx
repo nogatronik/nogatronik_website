@@ -91,7 +91,7 @@ const Sidebar = ({ setComp }: Props) => {
                         >
                           <RiLoginBoxFill className="icon group-hover:text-primary anim-transition" />
                           <small className="text-sm group-hover:text-primary anim-transition">
-                            login
+                            Login
                           </small>
                         </Link>
                       ) : (
@@ -135,7 +135,7 @@ const Sidebar = ({ setComp }: Props) => {
                 className="button absolute bottom-10 right-5"
               >
                 <RiLogoutBoxFill className="icon" />
-                <small>sign out</small>
+                <small>Sign out</small>
               </button>
             ) : (
               <Link

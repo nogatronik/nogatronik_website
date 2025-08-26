@@ -1,5 +1,5 @@
-import Principles from "@/components/pages/homePage/principals/Principles";
-import WebsiteBg from "@/components/pages/homePage/websiteBg/WebsiteBg";
+import Principles from "@/components/pages/aboutPage/principals/Principles";
+import WebsiteBg from "@/components/pages/aboutPage/websiteBg/WebsiteBg";
 import React from "react";
 
 /**

@@ -3,8 +3,8 @@ import React from "react";
 import { FaImage } from "react-icons/fa";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
-import ArticleActions from "@/components/pages/engPage/articles/ArticleActions";
-import Discussion from "@/components/pages/engPage/articles/Discussion";
+import ArticleActions from "@/components/pages/engineeringPage/articles/ArticleActions";
+import Discussion from "@/components/pages/engineeringPage/articles/Discussion";
 
 /**
  *

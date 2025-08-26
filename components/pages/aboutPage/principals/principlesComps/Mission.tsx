@@ -30,7 +30,7 @@ const Mission = () => {
           />
         </div>
         <p className="text-justify break-normal w-full md:max-w-[600px] ">
-          Our <strong>mission</strong> is to unlock and spread knowledge in
+          Our <strong className="uppercase">mission</strong> is to unlock and spread knowledge in
           science, technology, and engineering by creating an accessible,
           engaging, and dynamic digital platform. We strive to inspire future
           generations, foster innovation, and cultivate a passion for continuous

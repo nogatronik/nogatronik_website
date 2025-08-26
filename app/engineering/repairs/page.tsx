@@ -1,9 +1,9 @@
 import React from "react";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
-import Services from "@/components/pages/engPage/repairs/Services";
-import RequestSteps from "@/components/pages/engPage/repairs/RequestSteps";
-import SendRequest from "@/components/pages/engPage/repairs/SendRequest";
+import Services from "@/components/pages/engineeringPage/repairs/Services";
+import RequestSteps from "@/components/pages/engineeringPage/repairs/RequestSteps";
+import SendRequest from "@/components/pages/engineeringPage/repairs/StartRequest";
 
 const RepairPage = () => {
   return (

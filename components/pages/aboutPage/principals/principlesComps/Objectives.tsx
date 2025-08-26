@@ -31,7 +31,7 @@ const Objectives = () => {
           />
         </div>
         <div className="flex flex-col gap-2 md:max-w-[600px]">
-        <p>Our <strong>objectives</strong> are: </p>
+        <p>Our <strong className="uppercase">objectives</strong> are: </p>
           <ul className="list-disc px-5">
             {HOME_SECTIONS_OBJECTIVES.map((obj, index) => (
               <li key={index}>

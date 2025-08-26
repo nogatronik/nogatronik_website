@@ -124,7 +124,7 @@ export const SignUpForm = () => {
         ) : (
           <button className="button mx-auto">
             <RiUserAddFill className="icon" />
-            <small>sign-up</small>
+            <small>Sign up</small>
           </button>
         )}
       </form>

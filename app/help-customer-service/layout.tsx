@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SideHelpServices } from "@/components/pages/helpCustomerService/SideHelpServices";
+import { SideHelpServices } from "@/components/pages/helpCustomerServicePage/SideHelpServices";
 
 interface Props {
   children: React.ReactNode;

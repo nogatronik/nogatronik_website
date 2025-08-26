@@ -28,8 +28,8 @@ import {
   NavLink,
   ShoppingSidePanelLinks,
 } from "@/lib/types";
-import IdeaDesc from "@/components/pages/homePage/websiteBg/IdeaDesc";
-import MAMention from "@/components/pages/homePage/websiteBg/MAMention";
+import IdeaDesc from "@/components/pages/aboutPage/websiteBg/IdeaDesc";
+import MAMention from "@/components/pages/aboutPage/websiteBg/MAMention";
 
 // Main nav links
 export const NAVLINKS: NavLink[] = [
@@ -146,21 +146,21 @@ export const SUBNAV: EngSubNav[] = [
     image: "/contentSumImgs/article_img_summary.svg",
     description:
       "Ready to learn and exchange ideas, come and look at my published articles.",
-    text: "articles",
+    text: "Articles",
   },
   {
     href: "/engineering/assets",
     image: "/contentSumImgs/download_img_summary.svg",
     description:
       "Ready to download, come and look at my manuals, blueprints, 3D parts, etc.",
-    text: "assets",
+    text: "Assets",
   },
   {
     href: "/engineering/repairs",
     image: "/contentSumImgs/repair_img_summary.svg",
     description:
       "Ready to create, make a repair request, follow the progress, and enjoy the final result",
-    text: "repairs",
+    text: "Repairs",
   },
 ];
 

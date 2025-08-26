@@ -54,8 +54,11 @@ const Footer = () => {
                   placeholder="your email here"
                   className="flex-1"
                 />
-                <button className=" group button">
-                  <small className="button-child">subscribe</small>
+                <button
+                  className=" group button disabled:opacity-50 disabled:pointer-events-none"
+                  disabled
+                >
+                  <small className="button-child">Subscribe</small>
                 </button>
               </div>
               <small>
@@ -82,14 +85,20 @@ const Footer = () => {
                     Return & Refund Policy
                   </small>
                 </Link>
-                <Link
-                  href={"/help-customer-service/contact-us"}
-                  className="group"
-                >
+                <div className="flex flex-col">
                   <small className="link-child anim-transition">
-                    Contact Us
+                    Contact Us:
                   </small>
-                </Link>
+                  <small>+1(949)594-9408</small>
+                  <Link
+                    href={"mailto:solutions@nogatronik.com"}
+                    className="group"
+                  >
+                    <small className="link-child anim-transition">
+                      solutions@nogatronik.com
+                    </small>
+                  </Link>
+                </div>
               </div>
 
               <div className="flex flex-col gap-2 ">

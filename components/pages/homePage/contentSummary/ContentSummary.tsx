@@ -54,7 +54,7 @@ const ContentSummary = () => {
               href={comp.link}
               className="group flex gap-2 items-center w-fit"
             >
-              <small className="link-child anim-transition">visit</small>
+              <small className="link-child anim-transition">Visit</small>
               <IoIosArrowForward className="icon link-child anim-transition group-hover:translate-x-1" />
             </Link>
           </ScrollIntoAnim>

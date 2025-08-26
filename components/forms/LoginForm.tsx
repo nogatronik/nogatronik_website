@@ -103,7 +103,7 @@ const LoginForm = () => {
         ) : (
           <button className="button">
             <RiLoginBoxFill className="icon" />
-            <small>login</small>
+            <small>Login</small>
           </button>
         )}
       </form>

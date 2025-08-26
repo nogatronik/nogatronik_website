@@ -82,14 +82,13 @@ const CreateNewPwdForm = ({ token }: Props) => {
           />
         </div>
         {isPending ? (
-                  <small>pending...</small>
-                ) : (
-                  <button className="button mx-auto">
-          <FaPlus className="icon" />
-          <small>create new password</small>
-        </button>
-                )}
-        
+          <small>pending...</small>
+        ) : (
+          <button className="button mx-auto">
+            <FaPlus className="icon" />
+            <small>Create new password</small>
+          </button>
+        )}
       </form>
       {success && (
         <div className="flex items-center gap-2 mx-auto border-2 border-onFailure p-2 rounded-md">

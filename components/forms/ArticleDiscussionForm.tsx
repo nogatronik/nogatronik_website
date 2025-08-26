@@ -61,11 +61,11 @@ const ArticleDiscussionForm = () => {
               className="group button"
             >
               <FaTrash className="icon" />
-              <small className="button-onFailure-child">cancel</small>
+              <small className="button-onFailure-child">Cancel</small>
             </button>
             <button className="group button">
               <BsFillSendFill className="icon" />
-              <small className="button-onSuccess-child">comment</small>
+              <small className="button-onSuccess-child">Comment</small>
             </button>
           </motion.div>
         )}

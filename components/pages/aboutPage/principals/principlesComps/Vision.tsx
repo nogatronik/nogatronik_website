@@ -29,7 +29,7 @@ const Vision = () => {
           />
         </div>
         <p className="text-justify break-normal w-full md:max-w-[600px]">
-          Our <strong>vision</strong> is to become a global reference in science
+          Our <strong className="uppercase">vision</strong> is to become a global reference in science
           and technology outreach—recognized for our excellence, innovation, and
           passion for knowledge. We aim to build a vibrant domestic and
           international community of enthusiasts, professionals, and makers who

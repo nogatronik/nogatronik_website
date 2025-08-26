@@ -31,7 +31,7 @@ const Values = () => {
           />
         </div>
         <ul className="list-disc w-full md:max-w-[600px] px-5">
-          <p>Our <strong>values</strong> are: </p>
+          <p>Our <strong className="uppercase">values</strong> are: </p>
           {HOME_SECTIONS_VALUES.map((obj, index) => (
             <li key={index}>
               <p>

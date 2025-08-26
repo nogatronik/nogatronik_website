@@ -1,5 +1,5 @@
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
-import Rating from "@/components/pages/shopping/Rating";
+import Rating from "@/components/pages/shoppingPage/Rating";
 import React from "react";
 import { FaImage } from "react-icons/fa";
 

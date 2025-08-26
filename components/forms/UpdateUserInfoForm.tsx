@@ -95,7 +95,7 @@ const UpdateUserInfoForm = ({ data }: Props) => {
           </div>
         )}
         <button className="col-span-2 button md:w-1/4 mt-2 mx-auto">
-          <small>update</small>
+          <small>Update</small>
         </button>
       </form>
     </>
