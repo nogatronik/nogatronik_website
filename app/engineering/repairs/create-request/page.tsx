@@ -175,7 +175,7 @@ const CreateRequestPage = () => {
 
           <button className="button w-full md:w-1/2 mx-auto">
             <IoMdCreate className="icon" />
-            <small>create request</small>
+            <small>Create request</small>
           </button>
         </form>
         {/* Form */}
