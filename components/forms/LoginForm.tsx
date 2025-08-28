@@ -58,7 +58,13 @@ const LoginForm = () => {
 
   return (
     <>
-      <form action={handleSignIn} className="flex flex-col gap-5 items-center">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSignIn(new FormData(e.currentTarget));
+        }}
+        className="flex flex-col gap-5 items-center"
+      >
         <div className="flex flex-col gap-2 w-full md:w-3/4">
           <label htmlFor="email" className="flex items-center gap-2">
             <MdEmail />
