@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useActionState, useState } from "react";
+import React, { startTransition, useActionState, useState } from "react";
 
 import { LuOctagonAlert } from "react-icons/lu";
 
 import { updateUserInfo } from "@/lib/actions/updateUserInfoAction";
 import { UpdateUserInfo } from "@/lib/types";
+import { getCaptchaToken } from "@/utils/captcha";
+import { toast } from "sonner";
 
 interface Props {
   data: {
@@ -36,10 +38,21 @@ const UpdateUserInfoForm = ({ data }: Props) => {
     initialState
   );
 
+  const handleSubmit = async (formData: FormData) => {
+    const token = await getCaptchaToken("update_user_info");
+    formData.append("token", token || "");
+
+    startTransition(() => {
+      formAction(formData);
+      if (state.success) toast.success("User info updated successfully");
+      else toast.error(state.message);
+    });
+  };
+
   return (
     <>
       <form
-        action={formAction}
+        action={handleSubmit}
         className="flex flex-col gap-5 w-full"
       >
         <input type="hidden" name="userID" value={data.userID} />

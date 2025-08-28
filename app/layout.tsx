@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 import { ReactLenis } from "@/utils/lenis";
+import { Toaster } from "@/components/ui/sonner";
 
 import Navbar from "@/components/global/navbar/Navbar";
 import Footer from "@/components/global/footer/Footer";
@@ -59,6 +60,12 @@ export default function RootLayout({
             <SpeedInsights />
             <Analytics />
             <Footer />
+            <Toaster
+              closeButton={true}
+              duration={4500}
+              position="top-center"
+              richColors
+            />
             <ScrollHelper />
           </Provider>
         </body>

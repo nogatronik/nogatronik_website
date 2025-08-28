@@ -49,7 +49,7 @@ const UserSidebar = ({ Component, setComp }: Props) => {
               },
             }}
             exit={{ x: 870 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[450px] p-5 bg-bg shadow-onRest"
+            className="fixed top-0 right-0 h-full w-full md:w-[450px] p-5 bg-background shadow-onRest"
           >
             <button
               onClick={() => setComp(null)}

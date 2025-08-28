@@ -49,7 +49,7 @@ const Sidebar = ({ setComp }: Props) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed top-0 right-0 flex flex-col gap-2 items-center justify-center bg-extra/75 backdrop-blur-[2px] w-full h-full z-40"
+            className="fixed top-0 right-0 flex flex-col gap-2 items-center justify-center bg-muted/75 backdrop-blur-[2px] w-full h-full z-40"
           >
             <button
               onClick={() => setOpen(false)}

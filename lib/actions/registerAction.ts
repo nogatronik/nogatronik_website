@@ -1,19 +1,12 @@
 "use server";
-import { connectDB } from "@/lib/mongodb";
-import { User, VerificationToken } from "@/models/User";
 import bcrypt from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
-import { sendVerificationEmail } from "../sendEmailVerf";
+
+import { connectDB } from "@/lib/mongodb";
 import { verifyCaptchaToken } from "@/utils/captcha";
-
-interface RegisterFormData {
-  name: string;
-  lName: string;
-  email: string;
-  password: string;
-  token?: string | null;
-}
-
+import { User, VerificationToken } from "@/models/User";
+import { sendVerificationEmail } from "../sendEmailVerf";
+import { registerSchema } from "@/lib/schemas/registerSchema";
 /**
  *
  * @param name: string
@@ -27,13 +20,32 @@ interface RegisterFormData {
  *
  * return: null | mongoDB error
  */
-export const register = async (values: RegisterFormData) => {
-  // Variables
-  const { email, password, name, lName, token } = values;
+export const register = async (formData: FormData) => {
+  const formValues = Object.fromEntries(formData.entries());
+  delete formValues.token;
 
+  const zodResult = registerSchema.safeParse(formValues);
+  if (!zodResult.success) {
+    const inputErrors: Record<string, string[]> = {};
+    zodResult.error.issues.forEach((issue) => {
+      const field = String(issue.path[0]);
+      if (!field) return;
+      if (!inputErrors[field]) inputErrors[field] = [];
+      inputErrors[field].push(issue.message);
+    });
+    return {
+      success: false,
+      message: "",
+      error: "There are input errors",
+      inputError: inputErrors,
+    };
+  }
+  const token = formData.get("token") as string;
   // If there's no token, return
   if (!token) {
     return {
+      success: false,
+      message: "",
       error: "Token not valid",
     };
   }
@@ -44,6 +56,8 @@ export const register = async (values: RegisterFormData) => {
   // If captchaData is null, return error
   if (!captchaData) {
     return {
+      success: false,
+      message: "",
       error: "Captcha Failed",
     };
   }
@@ -55,12 +69,12 @@ export const register = async (values: RegisterFormData) => {
   if (
     !captchaData.success ||
     captchaData.action !== "register" ||
-    captchaData.score < 0.5
+    captchaData.score < 0.7
   ) {
     return {
-      error: !captchaData.success
-        ? captchaData["error-codes"].toString()
-        : null,
+      success: false,
+      message: "",
+      error: !captchaData.success ? captchaData["error-codes"].toString() : "",
     };
   }
 
@@ -68,12 +82,19 @@ export const register = async (values: RegisterFormData) => {
   try {
     // Connect to DB
     await connectDB();
+    const name = formData.get("fName") as string;
+    const lName = formData.get("lName") as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("pwd") as string;
 
     // Variables (creates user)
     const userFound = await User.findOne({ email });
     if (userFound) {
+      console.log("Email already in use");
       return {
-        error: "Email already exists!",
+        success: false,
+        message: "",
+        error: "Email already in use",
       };
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -97,6 +118,12 @@ export const register = async (values: RegisterFormData) => {
 
     // Send verification email for user to signin to web app
     await sendVerificationEmail(name, email, token);
+
+    return {
+      success: true,
+      message: "Registration successful",
+      error: "",
+    };
   } catch (e) {
     console.log(e);
     throw new Error("Error during registration");

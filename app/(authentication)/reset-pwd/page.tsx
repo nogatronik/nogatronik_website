@@ -9,7 +9,8 @@ import CreateNewPwdForm from "@/components/forms/CreateNewPwdForm";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ResetPwdPage = async ({ searchParams }: any) => {
-  const token = searchParams?.token as string | undefined;
+  const urlParams = await searchParams;
+  const token = urlParams?.token as string | undefined;
 
   const { valid } = await validateResetToken(token);
 
@@ -23,8 +24,8 @@ const ResetPwdPage = async ({ searchParams }: any) => {
             alt="email to reset password"
             width={200}
             height={200}
-            priority
             quality={100}
+            priority
             className="w-[200px] h-auto"
           />
         </div>

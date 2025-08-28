@@ -4,12 +4,14 @@ import { User } from "@/models/User";
 import { revalidateTag } from "next/cache";
 import { UpdateUserAccInfo } from "../types";
 import bcrypt from "bcryptjs";
+import { verifyCaptchaToken } from "@/utils/captcha";
 
 /**
  *
  * @param userID: string
  * @param email: string
  * @param password: string
+ * @param token: string || null
  *
  * This server action receives the formData from the update User Account Info form and creates a user
  * in the database. Bcrypt is used to hash the password before storing it.
@@ -20,6 +22,44 @@ export const updateUserAccInfoAction = async (
   prevState: UpdateUserAccInfo,
   formData: FormData
 ): Promise<UpdateUserAccInfo> => {
+  const token = formData.get("token") as string;
+  if (!token) {
+    return {
+      success: false,
+      message: "captcha token missing",
+      user: null,
+    };
+  }
+  // Verify Token and receive response
+  const captchaData = await verifyCaptchaToken(token);
+
+  // If captchaData is null, return error
+  if (!captchaData) {
+    return {
+      success: false,
+      message: "captcha failed",
+      user: null,
+    };
+  }
+
+  /* 
+    If captchaData fails, success is false, action isn't update_account_info, or score
+    is less than .5, return failed registration
+    */
+  if (
+    !captchaData.success ||
+    captchaData.action !== "update_account_info" ||
+    captchaData.score < 0.8
+  ) {
+    return {
+      success: false,
+      message: !captchaData.success
+        ? captchaData["error-codes"].toString()
+        : "captcha failed",
+      user: null,
+    };
+  }
+
   // Variables
   const userID = formData.get("userID") as string;
 

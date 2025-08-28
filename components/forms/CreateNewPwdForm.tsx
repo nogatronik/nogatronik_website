@@ -5,8 +5,8 @@ import { getCaptchaToken } from "@/utils/captcha";
 import { useRouter } from "next/navigation";
 
 import { FaPlus, FaUnlockAlt } from "react-icons/fa";
-import { LuOctagonAlert } from "react-icons/lu";
 import { createNewPwd } from "@/lib/actions/createNewPwdAction";
+import { toast } from "sonner";
 
 interface Props {
   token: string | undefined;
@@ -14,9 +14,7 @@ interface Props {
 
 const CreateNewPwdForm = ({ token }: Props) => {
   const router = useRouter();
-  const [error, setError] = useState("");
   const [isPending, setIsPending] = useState(false);
-  const [success, setSuccess] = useState("");
 
   /**
    *
@@ -28,7 +26,7 @@ const CreateNewPwdForm = ({ token }: Props) => {
    */
   const handleSubmit = async (formData: FormData) => {
     setIsPending(true);
-    const recapToken = await getCaptchaToken();
+    const recapToken = await getCaptchaToken("create_new_pwd");
 
     // calling createNewPwd action, creates a new password for the user
     const r = await createNewPwd({
@@ -39,14 +37,13 @@ const CreateNewPwdForm = ({ token }: Props) => {
 
     // Handling error or successful return. Error-display error, Success: redirect user to login page
     if (r?.error) {
-      setError(r.error);
+      setIsPending(false);
+      toast.error(r.error);
       return;
     } else {
       setIsPending(false);
-      setSuccess("Password successfully changed");
-      setTimeout(() => {
-        router.push("/login");
-      }, 4500);
+      toast.success("Password successfully changed");
+      router.push("/login");
     }
   };
 
@@ -64,7 +61,6 @@ const CreateNewPwdForm = ({ token }: Props) => {
             name="pwd"
             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
             required
-            onChange={() => setError("")}
           />
         </div>
         <div className="flex flex-col gap-2 w-full md:w-3/4">
@@ -78,7 +74,6 @@ const CreateNewPwdForm = ({ token }: Props) => {
             name="confirm-pwd"
             placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
             required
-            onChange={() => setError("")}
           />
         </div>
         {isPending ? (
@@ -90,18 +85,6 @@ const CreateNewPwdForm = ({ token }: Props) => {
           </button>
         )}
       </form>
-      {success && (
-        <div className="flex items-center gap-2 mx-auto border-2 border-onFailure p-2 rounded-md">
-          <LuOctagonAlert className="icon text-onFailure" />
-          <small className="text-onFailure">{success}</small>
-        </div>
-      )}
-      {error && (
-        <div className="flex items-center gap-2 mx-auto p-2 border-2 border-primary rounded-md">
-          <LuOctagonAlert className="icon text-secondary" />
-          <small className="text-secondary">{error}</small>
-        </div>
-      )}
     </>
   );
 };

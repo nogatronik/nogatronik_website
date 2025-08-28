@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useActionState } from "react";
+import React, { startTransition, useActionState } from "react";
 
 import { LuOctagonAlert } from "react-icons/lu";
 
 import { UpdateUserAccInfo } from "@/lib/types";
 import { updateUserAccInfoAction } from "@/lib/actions/updateUserAccInfoAction";
+import { getCaptchaToken } from "@/utils/captcha";
+import { toast } from "sonner";
 
 interface Props {
   data: {
@@ -25,14 +27,25 @@ const initialState: UpdateUserAccInfo = {
 };
 
 const UpdateAccInfoForm = ({ data }: Props) => {
-  const [state, formAction] = useActionState<UpdateUserAccInfo, FormData>(
-    updateUserAccInfoAction,
-    initialState
-  );
+  const [state, formAction, isPending] = useActionState<
+    UpdateUserAccInfo,
+    FormData
+  >(updateUserAccInfoAction, initialState);
+
+  const handleSubmit = async (formData: FormData) => {
+    const token = await getCaptchaToken("update_account_info");
+    formData.append("token", token || "");
+
+    startTransition(() => {
+      formAction(formData);
+      if (state.success) toast.success("Account info updated successfully");
+      else toast.error(state.message);
+    });
+  };
 
   return (
     <>
-      <form action={formAction} className="flex flex-col gap-5 w-full">
+      <form action={handleSubmit} className="flex flex-col gap-5 w-full">
         <input type="hidden" name="userID" value={data.userID} />
 
         <div className="flex flex-col gap-2">
@@ -65,9 +78,13 @@ const UpdateAccInfoForm = ({ data }: Props) => {
             <small className="text-secondary">{state?.message}</small>
           </div>
         )}
-        <button className="col-span-2 button md:w-1/4 mt-2 mx-auto">
-          <small>Update</small>
-        </button>
+        {isPending ? (
+          <small>pending...</small>
+        ) : (
+          <button className="col-span-2 button md:w-1/4 mt-2 mx-auto">
+            <small>Update</small>
+          </button>
+        )}
       </form>
     </>
   );

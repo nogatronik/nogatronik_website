@@ -8,31 +8,30 @@ import { sendResetPwdEmail } from "@/lib/actions/resetPwdAction";
 
 import { MdEmail } from "react-icons/md";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { LuOctagonAlert } from "react-icons/lu";
+import { toast } from "sonner";
 
 const ResetPwdForm = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
   const [isPending, setIsPending] = useState(false);
-  const [success, setSuccess] = useState("");
 
   const handleResetPwd = async (formData: FormData) => {
     setIsPending(true);
-    const token = await getCaptchaToken();
+    const token = await getCaptchaToken("reset_password");
 
     const r = await sendResetPwdEmail({
       email: formData.get("email") as string,
       token,
     });
     if (r?.error) {
-      setError(r.error);
+      setIsPending(false);
+      toast.error(r.error);
       return;
     } else {
       setIsPending(false);
-      setSuccess("Please Verify email and create new password");
-      setTimeout(() => {
-        router.push("/login");
-      }, 4500);
+      toast.success(
+        "If an account with that email exists, you'll receive a link to reset your password"
+      );
+      router.push("/login");
     }
   };
 
@@ -58,18 +57,6 @@ const ResetPwdForm = () => {
           <RiSendPlaneFill className="icon" />
           <small>Send</small>
         </button>
-      )}
-      {success && (
-        <div className="flex items-center gap-2 mx-auto border-2 border-onFailure p-2 rounded-md">
-          <LuOctagonAlert className="icon text-onFailure" />
-          <small className="text-onFailure">{success}</small>
-        </div>
-      )}
-      {error && (
-        <div className="flex items-center gap-2 mx-auto p-2 border-2 border-primary rounded-md">
-          <LuOctagonAlert className="icon text-secondary" />
-          <small className="text-secondary">{error}</small>
-        </div>
       )}
     </form>
   );

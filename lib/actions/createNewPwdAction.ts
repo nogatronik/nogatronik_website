@@ -47,13 +47,13 @@ export const createNewPwd = async (values: RegisterFormData) => {
   }
 
   /* 
-  If captchaData fails, success is false, action isn't register, or score
-  is less than .5, return failed registration
+  If captchaData fails, success is false, action isn't create_new_pwd, or score
+  is less than ., return failed registration
   */
   if (
     !captchaData.success ||
-    captchaData.action !== "register" ||
-    captchaData.score < 0.5
+    captchaData.action !== "create_new_pwd" ||
+    captchaData.score < 0.8
   ) {
     return {
       error: !captchaData.success
@@ -61,7 +61,6 @@ export const createNewPwd = async (values: RegisterFormData) => {
         : null,
     };
   }
-
   // if reCaptcha is successful continue with creating the new password
   try {
     // Connect to DB

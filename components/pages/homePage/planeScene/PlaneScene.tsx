@@ -62,7 +62,7 @@ const PlaneScene = () => {
       ref={mainRef}
       className="relative h-[350px] w-full flex flex-col justify-center fade-out-border overflow-hidden"
     >
-      <div className="rounded-md bg-extra/75 backdrop-blur-[2px] w-fit p-2 shadow-onRest z-10">
+      <div className="rounded-md bg-muted/75 backdrop-blur-[2px] w-fit p-2 shadow-onRest z-10">
         <h1 className="text-xl md:text-5xl p-5">Explore, Create, and Fly</h1>
         <p className="text-base md:text-2xl p-5 drop-shadow-md md:w-[550px]">
           Discover cutting-edge tech insights, download assets, and shop

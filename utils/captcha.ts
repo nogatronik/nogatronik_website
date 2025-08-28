@@ -7,7 +7,7 @@ import { CaptchaData } from "@/lib/types";
  *
  *  return: token as string
  */
-export const getCaptchaToken = () => {
+export const getCaptchaToken = (action: string) => {
   return new Promise<string | null>((resolve) => {
     grecaptcha.ready(async () => {
       const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -17,7 +17,7 @@ export const getCaptchaToken = () => {
       }
 
       const token = await grecaptcha.execute(siteKey, {
-        action: "register",
+        action: action,
       });
       resolve(token);
     });

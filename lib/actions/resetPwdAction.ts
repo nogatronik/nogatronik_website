@@ -93,13 +93,13 @@ export const sendResetPwdEmail = async (values: ResetPwdFormData) => {
   }
 
   /* 
-  If captchaData fails, success is false, action isn't register, or score
-  is less than .5, return failed registration
+  If captchaData fails, success is false, action isn't reset_password, or score
+  is less than .8, return failed registration
   */
   if (
     !captchaData.success ||
-    captchaData.action !== "register" ||
-    captchaData.score < 0.5
+    captchaData.action !== "reset_password" ||
+    captchaData.score < 0.8
   ) {
     return {
       error: !captchaData.success
@@ -114,21 +114,18 @@ export const sendResetPwdEmail = async (values: ResetPwdFormData) => {
 
     // Variables (creates user)
     const userFound = await User.findOne({ email });
-    if (!userFound) {
-      return {
-        error: "Email does no exist!",
-      };
-    }
-    const token = uuidv4();
-    const userToken = new ResetPwdToken({
-      token,
-      userId: userFound._id,
-      expires: new Date(Date.now() + 1000 * 60 * 60), // Token expires in 1 hour
-    });
-    await userToken.save();
+    if (userFound) {
+      const token = uuidv4();
+      const userToken = new ResetPwdToken({
+        token,
+        userId: userFound._id,
+        expires: new Date(Date.now() + 1000 * 60 * 60), // Token expires in 1 hour
+      });
+      await userToken.save();
 
-    // Send reset password email
-    await sendEmail(userFound.name, email, token);
+      // Send reset password email
+      await sendEmail(userFound.name, email, token);
+    }
   } catch (e) {
     console.log(e);
     throw new Error("Error during sending reset password email");

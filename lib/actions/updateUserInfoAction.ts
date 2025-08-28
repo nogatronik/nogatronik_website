@@ -3,6 +3,7 @@ import { connectDB } from "@/lib/mongodb";
 import { User } from "@/models/User";
 import { revalidateTag } from "next/cache";
 import { UpdateUserInfo } from "../types";
+import { verifyCaptchaToken } from "@/utils/captcha";
 
 /**
  *
@@ -11,6 +12,7 @@ import { UpdateUserInfo } from "../types";
  * @param lName: string
  * @param phoneNumber: string
  * @param dateOfBirth: string | null
+ * @param token: string | null
  *
  * This server action receives the formData from the update User Info form and creates a user
  * in the database. Bcrypt is used to hash the password before storing it.
@@ -21,6 +23,44 @@ export const updateUserInfo = async (
   prevState: UpdateUserInfo,
   formData: FormData
 ): Promise<UpdateUserInfo> => {
+  const token = formData.get("token") as string;
+  if (!token) {
+    return {
+      success: false,
+      message: "captcha token missing",
+      user: null,
+    };
+  }
+  // Verify Token and receive response
+  const captchaData = await verifyCaptchaToken(token);
+
+  // If captchaData is null, return error
+  if (!captchaData) {
+    return {
+      success: false,
+      message: "captcha failed",
+      user: null,
+    };
+  }
+
+  /* 
+      If captchaData fails, success is false, action isn't update_info_info, or score
+      is less than .8, return failed registration
+      */
+  if (
+    !captchaData.success ||
+    captchaData.action !== "update_user_info" ||
+    captchaData.score < 0.8
+  ) {
+    return {
+      success: false,
+      message: !captchaData.success
+        ? captchaData["error-codes"].toString()
+        : "captcha failed",
+      user: null,
+    };
+  }
+
   // Variables
   const userID = formData.get("userID") as string;
 
