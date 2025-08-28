@@ -5,6 +5,7 @@ import React, { useActionState } from "react";
 import { IoMdCreate } from "react-icons/io";
 
 const CreateRepairReqForm = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, action, isPending] = useActionState(createRepairReqAction, {
     success: false,
     message: "",
@@ -201,15 +202,14 @@ const CreateRepairReqForm = () => {
           />
         </div>
       </div>
-      {isPending ? 
-  <small>pending...</small>
-:
-
-      <button className="button w-full md:w-1/2 mx-auto">
-        <IoMdCreate className="icon" />
-        <small>Create request</small>
-      </button>
-      }
+      {isPending ? (
+        <small>pending...</small>
+      ) : (
+        <button className="button w-full md:w-1/2 mx-auto">
+          <IoMdCreate className="icon" />
+          <small>Create request</small>
+        </button>
+      )}
     </form>
   );
 };
