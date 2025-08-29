@@ -1,18 +1,76 @@
 "use client";
 
-import { createRepairReqAction } from "@/lib/actions/createRepairReqAction";
-import React, { useActionState } from "react";
+import React, {
+  startTransition,
+  useActionState,
+  useRef,
+  useState,
+} from "react";
+
 import { IoMdCreate } from "react-icons/io";
 
+import { RepairRequest } from "@/lib/types";
+import { createRepairReq } from "@/lib/actions/createRepairReqAction";
+import { repairSchema } from "@/lib/schemas/repairSchema";
+import { getCaptchaToken } from "@/utils/captcha";
+import { toast } from "sonner";
+
+export const InitialState: RepairRequest = {
+  success: false,
+  message: "",
+  error: "",
+  formInput: {
+    uploadImage: null,
+    uploadVideo: null,
+    brand: "",
+    model: "",
+    modelNumber: "",
+    issueTitle: "",
+    issueDate: null,
+    previousWork: "",
+    issueOcccurance: "",
+    warranty: "",
+    prefferedDelivery: "",
+    preferredContactMethod: "",
+    issueDescription: "",
+  },
+};
+
 const CreateRepairReqForm = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [state, action, isPending] = useActionState(createRepairReqAction, {
-    success: false,
-    message: "",
-  });
+  const [state, formAction, isPending] = useActionState(
+    createRepairReq,
+    InitialState
+  );
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const [inputError, setInputError] = useState<Record<string, string[]>>({});
+
+  const handleSubmit = async (formData: FormData) => {
+    const zodResult = repairSchema.safeParse(
+      Object.fromEntries(formData.entries())
+    );
+    if (!zodResult.success) {
+      const errors: Record<string, string[]> = {};
+      zodResult.error.issues.forEach((issue) => {
+        const field = String(issue.path[0]);
+        if (!field) return;
+        if (!errors[field]) errors[field] = [];
+        errors[field].push(issue.message);
+      });
+      setInputError(errors);
+      return;
+    }
+
+    // const token = await getCaptchaToken("repair-request");
+    // formData.append("token", token || "");
+    startTransition(() => {
+      formAction(formData);
+      if (!state.error) toast.success("Repair Request sent successfully");
+      else toast.error(state.error);
+    });
+  };
 
   return (
-    <form action={action} className="flex flex-col gap-5">
+    <form action={handleSubmit} className="flex flex-col gap-5">
       <div id="media-assets" className="grid gap-5 grid-cols-1 md:grid-cols-2">
         <div className="flex flex-col col-span-2">
           <h3>Media</h3>
@@ -22,7 +80,7 @@ const CreateRepairReqForm = () => {
           </small>
         </div>
         <div className="flex flex-col gap-2 col-span-2 md:col-auto">
-          <label htmlFor="upload-img">
+          <label htmlFor="uploadImage">
             <small>Upload Images (max 5):</small>
           </label>
           <div className="upload-box">
@@ -31,7 +89,7 @@ const CreateRepairReqForm = () => {
         </div>
 
         <div className="flex flex-col gap-2 col-span-2 md:col-auto">
-          <label htmlFor="upload-video">
+          <label htmlFor="uploadVideo">
             <small>Upload Video (max 2 min):</small>
           </label>
           <div className="upload-box">
@@ -39,6 +97,7 @@ const CreateRepairReqForm = () => {
           </div>
         </div>
       </div>
+
       <div className="flex flex-col col-span-2">
         <h3>Questions</h3>
         <small>
@@ -47,126 +106,208 @@ const CreateRepairReqForm = () => {
           information.
         </small>
       </div>
+
       <div id="item-details" className="flex flex-wrap gap-5">
-        <div className="flex-1 flex flex-col gap-2">
-          <label htmlFor="brand">
-            <small>Item&apos;s Brand:</small>
-          </label>
+        <label htmlFor="brand" className="flex-1 flex flex-col gap-2">
+          <small>Item&apos;s Brand:</small>
           <input
             type="text"
             id="brand"
             name="brand"
             placeholder="brand name"
-            required
+            // required
+            defaultValue={state.formInput.brand}
           />
-        </div>
-        <div className="flex-1 flex flex-col gap-2">
-          <label htmlFor="model">
-            <small>Item&apos;s Model:</small>
-          </label>
+          {inputError.brand && (
+            <small className="text-red-400">{inputError.brand[0]}</small>
+          )}
+        </label>
+
+        <label htmlFor="model" className="flex-1 flex flex-col gap-2">
+          <small>Item&apos;s Model:</small>
           <input
             type="text"
             id="model"
             name="model"
             placeholder="model name"
-            required
+            // required
+            defaultValue={state.formInput.model}
           />
-        </div>
+          {inputError.model && (
+            <small className="text-red-400">{inputError.model[0]}</small>
+          )}
+        </label>
 
-        <div className="flex-1 flex flex-col gap-2">
-          <label htmlFor="model-number">
-            <small>Model number:</small>
-          </label>
+        <label htmlFor="modelNumber" className="flex-1 flex flex-col gap-2">
+          <small>Model number:</small>
           <input
             type="text"
-            id="model-number"
-            name="model-number"
+            id="modelNumber"
+            name="modelNumber"
             placeholder="model number"
-            required
+            // required
+            defaultValue={state.formInput.modelNumber}
           />
-        </div>
+          {inputError.modelNumber && (
+            <small className="text-red-400">{inputError.modelNumber[0]}</small>
+          )}
+        </label>
       </div>
 
       <div id="issue-questions" className="grid gap-5 grid-cols-3">
-        <div className="flex flex-col gap-2 col-span-3 md:col-span-2">
-          <label htmlFor="issue-title">
-            <small>Issue Title:</small>
-          </label>
+        <label
+          htmlFor="issueTitle"
+          className="flex flex-col gap-2 col-span-3 md:col-span-2"
+        >
+          <small>Issue Title:</small>
           <input
             type="text"
-            id="issue-title"
-            name="issue-title"
+            id="issueTitle"
+            name="issueTitle"
             placeholder="brief title of the issue"
-            required
+            // required
+            defaultValue={state.formInput.issueTitle}
           />
-        </div>
+          {inputError.issueTitle && (
+            <small className="text-red-400">{inputError.issueTitle[0]}</small>
+          )}
+        </label>
 
-        <div className="flex flex-col gap-2 col-span-3 md:col-auto">
-          <label htmlFor="issue-date">
-            <small>When did the issue start:</small>
-          </label>
-          <input type="date" id="issue-date" name="issue-date" />
-        </div>
+        <label
+          htmlFor="issueDate"
+          className="flex flex-col gap-2 col-span-3 md:col-auto"
+        >
+          <small>When did the issue start:</small>
+          <input
+            type="date"
+            id="issueDate"
+            name="issueDate"
+            defaultValue={
+              state.formInput.issueDate
+                ? state.formInput.issueDate.toISOString().split("T")[0]
+                : undefined
+            }
+          />
+          {inputError.issueDate && (
+            <small className="text-red-400">{inputError.issueDate[0]}</small>
+          )}
+        </label>
 
-        <div className=" flex flex-col gap-2 col-span-3 md:col-auto">
-          <label htmlFor="question-previous-work">
-            <small>Has the item received any work:</small>
-          </label>
+        <label
+          htmlFor="previousWork"
+          className=" flex flex-col gap-2 col-span-3 md:col-auto"
+        >
+          <small>Has the item received any work:</small>
           <input
             type="text"
-            id="question-previous-work"
-            name="question-previous-work"
+            id="previousWork"
+            name="previousWork"
             placeholder="yes/no. If yes, then who"
-            required
+            // required
+            defaultValue={state.formInput.previousWork}
           />
-        </div>
+          {inputError.previousWork && (
+            <small className="text-red-400">{inputError.previousWork[0]}</small>
+          )}
+        </label>
 
-        <div className=" flex flex-col gap-2 col-span-3 md:col-auto">
-          <label htmlFor="question-issue-occcurance">
-            <small>Issue Occurance:</small>
-          </label>
+        <label
+          htmlFor="issueOcccurance"
+          className=" flex flex-col gap-2 col-span-3 md:col-auto"
+        >
+          <small>Issue Occurance:</small>
           <input
             type="text"
-            id="question-issue-occcurance"
-            name="question-issue-occcurance"
+            id="issueOcccurance"
+            name="issueOcccurance"
             placeholder="constantly or intermittently"
-            required
+            // required
+            defaultValue={state.formInput.issueOcccurance}
           />
-        </div>
-
-        <div className=" flex flex-col gap-2 col-span-3 md:col-auto">
-          <label htmlFor="question-warranty">
-            <small>Is the device under warranty:</small>
-          </label>
-          <input
-            type="text"
-            id="question-warranty"
-            name="question-warranty"
-            placeholder="yes or no"
-            required
-          />
-        </div>
-
-        <div className=" flex flex-col gap-2 col-span-3 md:col-span-2">
-          <label htmlFor="question-delivery">
-            <small>
-              Would you want to coordinate an in-person delivery [PMVAC Field -
-              McCarty Rd., Eastvale, CA 92880]:
+          {inputError.issueOcccurance && (
+            <small className="text-red-400">
+              {inputError.issueOcccurance[0]}
             </small>
-          </label>
+          )}
+        </label>
+
+        {/* <label
+          htmlFor="issueOcccurance"
+          className=" flex flex-col gap-2 col-span-3 md:col-auto"
+        >
+          <small>Issue Occurance:</small>
+          <select name="issueOcccurance" id="issueOcccurance" className="input">
+            <option value="yes">constantly</option>
+            <option value="no">intermittently</option>
+          </select>
+        </label> */}
+
+        <label
+          htmlFor="warranty"
+          className=" flex flex-col gap-2 col-span-3 md:col-auto"
+        >
+          <small>Is the device under warranty:</small>
           <input
             type="text"
-            id="question-warranty"
-            name="question-warranty"
-            placeholder="yes/no. If yes, then provide day and time."
-            required
+            id="warranty"
+            name="warranty"
+            placeholder="yes or no"
+            // required
+            defaultValue={state.formInput.warranty}
           />
-        </div>
+          {inputError.warranty && (
+            <small className="text-red-400">{inputError.warranty[0]}</small>
+          )}
+        </label>
 
-        <div className=" flex flex-col gap-2 col-span-3">
-          <label htmlFor="question-issue-description">
-            <small>Describe the issue in detail:</small>
-          </label>
+        <label
+          htmlFor="prefferedDelivery"
+          className=" flex flex-col gap-2 col-span-3 md:col-span-2"
+        >
+          <small>
+            Would you want to coordinate an in-person delivery [PMVAC Field -
+            McCarty Rd., Eastvale, CA 92880]:
+          </small>
+          <input
+            type="text"
+            id="prefferedDelivery"
+            name="prefferedDelivery"
+            placeholder="yes/no. If yes, then provide day and time."
+            // required
+            defaultValue={state.formInput.prefferedDelivery}
+          />
+          {inputError.prefferedDelivery && (
+            <small className="text-red-400">
+              {inputError.prefferedDelivery[0]}
+            </small>
+          )}
+        </label>
+
+        <label
+          htmlFor="preferredContactMethod"
+          className=" flex flex-col gap-2 col-span-3 md:col-auto"
+        >
+          <small>Preferred Contact Method:</small>
+          <input
+            type="text"
+            id="preferredContactMethod"
+            name="preferredContactMethod"
+            placeholder="provide phone or email"
+            // required
+            defaultValue={state.formInput.preferredContactMethod}
+          />
+          {inputError.preferredContactMethod && (
+            <small className="text-red-400">
+              {inputError.preferredContactMethod[0]}
+            </small>
+          )}
+        </label>
+
+        <label
+          htmlFor="issueDescription"
+          className=" flex flex-col gap-2 col-span-3"
+        >
+          <small>Describe the issue in detail:</small>
           <div className="ml-2">
             <small className="font-extrabold">
               Note: Please go over these questions/suggestions in your
@@ -193,17 +334,33 @@ const CreateRepairReqForm = () => {
               </li>
             </ul>
           </div>
+
           <textarea
-            name="question-issue-description"
-            id="question-issue-description"
+            rows={1}
+            ref={textareaRef}
+            name="issueDescription"
+            id="issueDescription"
             placeholder="provide a detailed description. Don't forget to include the questions/suggestions from above."
-            className="p-5"
-            required
+            className="p-5 h-fit overflow-hidden"
+            // required
+            onInput={() => {
+              textareaRef.current!.style.height = "auto";
+              textareaRef.current!.style.height = `${
+                textareaRef.current!.scrollHeight
+              }px`;
+            }}
+            defaultValue={state.formInput.issueDescription}
           />
-        </div>
+          {inputError.issueDescription && (
+            <small className="text-red-400">
+              {inputError.issueDescription[0]}
+            </small>
+          )}
+        </label>
       </div>
+
       {isPending ? (
-        <small>pending...</small>
+        <small className="mx-auto">pending...</small>
       ) : (
         <button className="button w-full md:w-1/2 mx-auto">
           <IoMdCreate className="icon" />

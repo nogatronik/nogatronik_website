@@ -131,3 +131,24 @@ export interface UpdateUserAccInfo {
     password: string;
   } | null;
 }
+
+export interface RepairRequest {
+  success: boolean;
+  message: string;
+  error: string;
+  formInput: {
+    uploadImage: FileList | null;
+    uploadVideo: FileList | null;
+    brand: string;
+    model: string;
+    modelNumber: string;
+    issueTitle: string;
+    issueDate: Date | null;
+    previousWork: string;
+    issueOcccurance: string;
+    warranty: string;
+    prefferedDelivery: string;
+    preferredContactMethod: string;
+    issueDescription: string;
+  };
+}

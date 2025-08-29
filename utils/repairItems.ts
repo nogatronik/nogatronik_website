@@ -28,7 +28,7 @@ export const REPAIR_STEPS: RepairStep[] = [
 
 export const SERVICES = [
   {
-    title: "Receivers",
+    title: "RC Receivers",
     text: "We offer expert antenna repair and receiver programming services tailored to your RC models. Whether it’s fixing damaged antennas or fine-tuning receivers to your exact specifications, we ensure precise restoration, seamless integration, and optimal performance for all your radio control equipment.",
   },
   {

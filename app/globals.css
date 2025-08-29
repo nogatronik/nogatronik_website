@@ -9,19 +9,19 @@
   --color-accent: #ffcf3b;
   --color-bg: #fdf8ef;
   --color-extra: #f8e7c9; */
-  --background: #fdf8ef;               /* was --color-bg */
-  --foreground: #4d4637;               /* pick a readable text color */
+  --background: #fdf8ef; /* was --color-bg */
+  --foreground: #4d4637; /* pick a readable text color */
 
-  --primary: #d26b65;                  /* was --color-primary */
+  --primary: #d26b65; /* was --color-primary */
   --primary-foreground: #ffffff;
 
-  --secondary: #4d4637;                /* was --color-secondary */
+  --secondary: #4d4637; /* was --color-secondary */
   --secondary-foreground: #ffffff;
 
-  --accent: #ffcf3b;                   /* was --color-accent */
+  --accent: #ffcf3b; /* was --color-accent */
   --accent-foreground: #000000;
 
-  --muted: #f8e7c9;                    /* was --color-extra */
+  --muted: #f8e7c9; /* was --color-extra */
   --muted-foreground: #4d4637;
 
   --destructive: #ef4444;
@@ -86,6 +86,10 @@
     @apply cursor-pointer w-fit flex items-center justify-center gap-2 p-4 bg-muted border-[1px] border-secondary/50 shadow-onRest hover:bg-accent/75 hover:shadow-onHover transition-all duration-300 ease-in-out;
   }
 
+  .input {
+    @apply p-2 border-[1px] bg-muted/75 border-secondary/50 outline-none shadow-onRest text-secondary placeholder:text-secondary/55 hover:shadow-onHover hover:bg-accent/75 active:bg-accent/75 active:shadow-onHover focus:bg-accent/75 focus:shadow-onHover transition-all duration-300 ease-in-out;
+  }
+
   .link-child {
     @apply group-hover:text-primary;
   }
@@ -143,7 +147,7 @@
   }
 
   .upload-box {
-    @apply w-full h-48 border-2 border-dashed border-secondary/50 rounded-lg flex items-center justify-center cursor-pointer hover:border-secondary transition-all duration-300 ease-in-out
+    @apply w-full h-48 border-2 border-dashed border-secondary/50 rounded-lg flex items-center justify-center cursor-pointer hover:border-secondary transition-all duration-300 ease-in-out;
   }
 }
 
