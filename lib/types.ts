@@ -111,6 +111,10 @@ export interface HomeAboutLink {
   component: React.ComponentType;
   key: string;
 }
+export interface SelectedService {
+  component: React.ComponentType;
+  title: string;
+}
 
 export interface UpdateUserInfo {
   success: boolean;
@@ -150,5 +154,24 @@ export interface RepairRequest {
     prefferedDelivery: string;
     preferredContactMethod: string;
     issueDescription: string;
+  };
+}
+
+export interface ProjectRequestDocument {
+  userId: mongoose.Types.ObjectId;
+  subject: string;
+  message: string;
+  createdAt: Date;
+  status: "pending" | "in_progress" | "completed" | "rejected";
+  completedAt: Date | null;
+}
+
+export interface ProjectRequest {
+  success: boolean;
+  message: string;
+  error: string | null;
+  formInput: {
+    subject: string;
+    message: string;
   };
 }

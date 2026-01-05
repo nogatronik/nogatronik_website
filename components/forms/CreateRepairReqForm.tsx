@@ -12,7 +12,7 @@ import { IoMdCreate } from "react-icons/io";
 import { RepairRequest } from "@/lib/types";
 import { createRepairReq } from "@/lib/actions/createRepairReqAction";
 import { repairSchema } from "@/lib/schemas/repairSchema";
-import { getCaptchaToken } from "@/utils/captcha";
+// import { getCaptchaToken } from "@/utils/captcha";
 import { toast } from "sonner";
 
 export const InitialState: RepairRequest = {
@@ -230,17 +230,6 @@ const CreateRepairReqForm = () => {
             </small>
           )}
         </label>
-
-        {/* <label
-          htmlFor="issueOcccurance"
-          className=" flex flex-col gap-2 col-span-3 md:col-auto"
-        >
-          <small>Issue Occurance:</small>
-          <select name="issueOcccurance" id="issueOcccurance" className="input">
-            <option value="yes">constantly</option>
-            <option value="no">intermittently</option>
-          </select>
-        </label> */}
 
         <label
           htmlFor="warranty"

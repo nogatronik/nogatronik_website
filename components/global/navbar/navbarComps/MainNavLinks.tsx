@@ -40,7 +40,9 @@ const MainNavLinks = ({ setComp }: Props) => {
 
   return (
     <>
-      <motion.nav className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 ">
+      <motion.nav
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 "
+      >
         {NAVLINKS.map((link, index) => (
           <Link key={index} href={link.href}>
             <motion.span
@@ -68,23 +70,26 @@ const MainNavLinks = ({ setComp }: Props) => {
           </Link>
         ))}
       </motion.nav>
-      {/* <AnimatePresence mode="popLayout">
-        {pathname.startsWith("/shopping") && ( */}
       <ShoppingNavLinks setComp={setComp} />
-      {/* )}
-      </AnimatePresence> */}
 
       <AnimatePresence mode="popLayout">
-        {session /*&& !pathname.startsWith("/shopping")*/ && (
-          <motion.button
-            onClick={() => signOut()}
+        {session && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="button"
+            className="group flex items-center gap-2 border-l-2 border-l-secondary pl-5"
           >
-            <RiLogoutBoxFill className="icon" />
-            <small>Sign out</small>
-          </motion.button>
+            <motion.small className="group-hover:hidden">
+              Hello, {session.user?.name}
+            </motion.small>
+            <motion.button
+              onClick={() => signOut()}
+              className="button h-[20px] hidden group-hover:flex"
+            >
+              <RiLogoutBoxFill className="icon" />
+              <motion.small>Sign out</motion.small>
+            </motion.button>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

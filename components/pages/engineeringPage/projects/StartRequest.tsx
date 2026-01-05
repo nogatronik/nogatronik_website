@@ -1,21 +1,17 @@
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useSession } from "next-auth/react";
 
 import { RiLoginBoxFill } from "react-icons/ri";
-
-import { authOptions } from "@/lib/auth";
-
-import { CustomSession } from "@/lib/types";
-import { getServerSession } from "next-auth";
 import { IoMdCreate } from "react-icons/io";
 
-const SendRequest = async () => {
-  const session: CustomSession | null = await getServerSession(authOptions);
+const StartRequest = () => {
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-col gap-5 items-center justify-center">
-      <h1>Ready to Create, Send Us a Request</h1>
+      <h3>Send Us a Repair Request</h3>
       <Image
         src={"/helpers/repair_request_img.svg"}
         height={350}
@@ -26,7 +22,7 @@ const SendRequest = async () => {
         className="drop-shadow-md w-[250px] md:w-[350px] h-auto"
       />
       {session ? (
-        <Link href={"/engineering/repairs/create-request"} className="button">
+        <Link href={"/engineering/projects/create-request"} className="button">
           <IoMdCreate className="icon" />
           <small>Start request</small>
         </Link>
@@ -43,4 +39,4 @@ const SendRequest = async () => {
   );
 };
 
-export default SendRequest;
+export default StartRequest;

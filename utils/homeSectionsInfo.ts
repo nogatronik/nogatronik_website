@@ -68,10 +68,10 @@ export const CONTENT_SUMMARY: WebsiteFeatureSummary[] = [
     link: "/shopping",
   },
   {
-    title: "Request Repairs",
+    title: "Start Projects",
     explanation:
-      "Restore your electronics with our expert repair services. We handle RC models, circuits, and devices using precise diagnostics and trusted methods. Request a quote, follow progress, and view repair logs.",
+      "Make a project request and track its progress from start to finish. Collaborate with our engineering team to bring your ideas to life with expert guidance and support.",
     image: "/contentSumImgs/repair_img_summary.svg",
-    link: "/engineering/repairs",
+    link: "/engineering/projects",
   },
 ];

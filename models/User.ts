@@ -1,4 +1,5 @@
 import {
+  ProjectRequestDocument,
   ResetPwdTokenDocument,
   UserDocument,
   VerificationTokenDocument,
@@ -72,6 +73,7 @@ const VerificationTokenSchema = new Schema<VerificationTokenDocument>({
   },
 });
 
+// ResetPwdToken schema
 const ResetPwdTokenSchema = new Schema<ResetPwdTokenDocument>({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -90,6 +92,34 @@ const ResetPwdTokenSchema = new Schema<ResetPwdTokenDocument>({
   },
 });
 
+// Project schema
+const ProjectReqSchema = new Schema<ProjectRequestDocument>(
+  {
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+    },
+    subject: {
+      type: String,
+      required: true,
+    },
+    message: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      enum: ["pending", "in_progress", "completed", "rejected"],
+      default: "pending",
+    },
+    completedAt: {
+      type: Date,
+      default: null,
+    },
+  },
+  { timestamps: true }
+);
+
 const User = mongoose.models?.User || model<UserDocument>("User", UserSchema);
 const VerificationToken =
   mongoose.models?.VerificationToken ||
@@ -104,4 +134,7 @@ const ResetPwdToken =
     ResetPwdTokenSchema
   );
 
-export { User, VerificationToken, ResetPwdToken };
+const ProjectRequest = mongoose.models?.ProjectRequest ||
+  mongoose.model<ProjectRequestDocument>("ProjectRequest", ProjectReqSchema);
+
+export { User, VerificationToken, ResetPwdToken, ProjectRequest };
