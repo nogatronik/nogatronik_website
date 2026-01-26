@@ -11,10 +11,12 @@ const getData = async (id: string | undefined) => {
   return userData.data;
 };
 
-const ProjRequestPage = async ({ params }: { params: { id: string } }) => {
-  const resolvedParams = await params;
-
-  const { id } = resolvedParams;
+const ProjRequestPage = async ({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) => {
+  const { id } = await params;
   const request: ProjectRequest | null = await getData(id);
 
   return (
