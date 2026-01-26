@@ -1,23 +1,36 @@
 "use server";
 
 import { verifyCaptchaToken } from "@/utils/captcha";
-import { ProjectRequest as ProjectRequestType } from "../types";
 import { User, ProjectRequest } from "@/models/User";
-import { connectDB } from "../mongodb";
-import { sendProjReqEmail } from "../sendProjReqEmail";
+import { connectDB } from "@/lib/mongodb";
+import { sendProjReqEmail } from "@/lib/sendProjReqEmail";
+import { revalidateTag } from "next/cache";
+
+import type { ProjectRequestActionState } from "@/lib/types";
 
 export const createProjectReq = async (
-  prevState: ProjectRequestType,
-  formData: FormData
-) => {
-  const formInput: ProjectRequestType["formInput"] = {
-    subject: (formData.get("subject") as string) ?? "",
-    message: (formData.get("projectDescription") as string) ?? "",
+  prevState: ProjectRequestActionState,
+  formData: FormData,
+): Promise<ProjectRequestActionState> => {
+  const formInput: ProjectRequestActionState["formInput"] = {
+    subject: ((formData.get("subject") as string) ?? "").trim(),
+    subtitle: ((formData.get("subtitle") as string) ?? "").trim().slice(0, 50),
+    message: ((formData.get("projectDescription") as string) ?? "").trim(),
   };
-  const recapToken = formData.get("recapToken") as string;
-  const userID = formData.get("userID") as string;
 
-  // If there's no token, return
+  const recapToken = (formData.get("recapToken") as string) ?? "";
+  const userID = (formData.get("userID") as string) ?? "";
+
+  // Basic server-side validation
+  if (!formInput.subject || !formInput.subtitle || !formInput.message) {
+    return {
+      success: false,
+      message: "",
+      error: "Please fill out all required fields.",
+      formInput,
+    };
+  }
+
   if (!recapToken) {
     return {
       success: false,
@@ -27,10 +40,8 @@ export const createProjectReq = async (
     };
   }
 
-  // Verify Token and receive response
   const captchaData = await verifyCaptchaToken(recapToken);
 
-  // If captchaData is null, return error
   if (!captchaData) {
     return {
       success: false,
@@ -40,10 +51,6 @@ export const createProjectReq = async (
     };
   }
 
-  /*
-    If captchaData fails, success is false, action isn't project_request, or score
-    is less than .8, return failed project request
-  */
   if (
     !captchaData.success ||
     captchaData.action !== "project_request" ||
@@ -54,13 +61,14 @@ export const createProjectReq = async (
       message: "",
       error: !captchaData.success
         ? captchaData["error-codes"].toString()
-        : null,
+        : "Captcha validation failed",
       formInput,
     };
   }
 
   try {
     await connectDB();
+
     const user = await User.findOne({ _id: userID });
     if (!user) {
       return {
@@ -70,23 +78,32 @@ export const createProjectReq = async (
         formInput,
       };
     }
-
     const newProjectReq = new ProjectRequest({
       userId: user._id,
       subject: formInput.subject,
+      subtitle: formInput.subtitle,
       message: formInput.message,
       status: "pending",
     });
+
     await newProjectReq.save();
 
-    await sendProjReqEmail(user.email, formInput.subject, formInput.message);
+    await sendProjReqEmail(
+      user.email,
+      formInput.subject,
+      formInput.subtitle,
+      formInput.message,
+    );
+
+    revalidateTag(`user-project-requests-${user._id}`);
 
     return {
       success: true,
       message: "request sent successfully",
-      error: "",
+      error: null,
       formInput: {
         subject: formInput.subject,
+        subtitle: "",
         message: "",
       },
     };

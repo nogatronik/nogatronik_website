@@ -27,13 +27,22 @@ const LoginProviders = () => {
         >
           <FaGoogle className="icon " />
         </button>
-        <button className="group button bg-transparent hover:bg-accent">
+        <button
+          className="group button bg-transparent hover:bg-accent disabled:opacity-50"
+          disabled
+        >
           <FaFacebookF className="icon " />
         </button>
-        <button className="group button bg-transparent hover:bg-accent">
+        <button
+          className="group button bg-transparent hover:bg-accent disabled:opacity-50"
+          disabled
+        >
           <FaApple className="icon " />
         </button>
-        <button className="group button bg-transparent hover:bg-accent">
+        <button
+          className="group button bg-transparent hover:bg-accent disabled:opacity-50"
+          disabled
+        >
           <FaInstagram className="icon " />
         </button>
       </div>

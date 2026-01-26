@@ -6,7 +6,6 @@ export async function middleware(req: NextRequest) {
 
   const { pathname } = req.nextUrl;
   const protectedRoutes = ["/user-account", "/create-request"];
-  console.log(pathname);
   if (
     !token &&
     protectedRoutes.some(

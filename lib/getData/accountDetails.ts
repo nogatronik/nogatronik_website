@@ -8,7 +8,7 @@ export const getAccountDetails = async (userID: string) => {
       try {
         await connectDB();
         const userFound = await User.findOne({ _id: userID }).select(
-          "name lName email password image dateOfBirth phoneNumber"
+          "name lName email password image dateOfBirth phoneNumber role"
         );
 
         const plainUser = userFound.toObject();

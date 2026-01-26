@@ -47,6 +47,20 @@ export const HOME_SECTIONS_VALUES: ValueGoal[] = [
 // Website's services summary
 export const CONTENT_SUMMARY: WebsiteFeatureSummary[] = [
   {
+    title: "Start Projects",
+    explanation:
+      "Make a project request and track its progress from start to finish. Collaborate with our engineering team to bring your ideas to life with expert guidance and support.",
+    image: "/contentSumImgs/repair_img_summary.svg",
+    link: "/engineering/projects",
+  },
+  {
+    title: "Buy Products",
+    explanation:
+      "Browse our selection of devices and tools for electronics and aeromodelling. Shop with confidence and enjoy secure checkout with fast delivery to your doorstep.",
+    image: "/contentSumImgs/shop_img_summary.svg",
+    link: "/shopping",
+  },
+  {
     title: "Read Articles",
     explanation:
       "Explore curated articles on astronomy, automation, electronics, and power systems. Learn at your own pace through engaging content designed to expand your knowledge and spark curiosity.",
@@ -59,19 +73,5 @@ export const CONTENT_SUMMARY: WebsiteFeatureSummary[] = [
       "Access templates, guides, and tools to support your projects. Our resources are free, practical, and easy to download—perfect for learners, makers, and professionals on the go.",
     image: "/contentSumImgs/download_img_summary.svg",
     link: "/engineering/assets",
-  },
-  {
-    title: "Buy Products",
-    explanation:
-      "Browse our selection of devices and tools for electronics and aeromodelling. Shop with confidence and enjoy secure checkout with fast delivery to your doorstep.",
-    image: "/contentSumImgs/shop_img_summary.svg",
-    link: "/shopping",
-  },
-  {
-    title: "Start Projects",
-    explanation:
-      "Make a project request and track its progress from start to finish. Collaborate with our engineering team to bring your ideas to life with expert guidance and support.",
-    image: "/contentSumImgs/repair_img_summary.svg",
-    link: "/engineering/projects",
   },
 ];

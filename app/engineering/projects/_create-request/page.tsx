@@ -1,7 +1,7 @@
 import React from "react";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
-import CreateRepairReqForm from "@/components/forms/CreateRepairReqForm";
+// import CreateRepairReqForm from "@/components/forms/CreateRepairReqForm";
 
 const CreateRequestPage = () => {
   return (
@@ -9,7 +9,7 @@ const CreateRequestPage = () => {
       <ContentLandAnim style="w-full flex flex-col gap-5">
         <h1>Create a Repair Request</h1>
 
-        <CreateRepairReqForm />
+        {/* <CreateRepairReqForm /> */}
       </ContentLandAnim>
     </main>
   );

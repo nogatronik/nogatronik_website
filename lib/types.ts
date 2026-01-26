@@ -89,6 +89,7 @@ export interface UserDocument {
   name: string;
   lName: string;
   image: string;
+  role: string;
   isOAuth: boolean;
   dateOfBirth: Date;
   phoneNumber: string;
@@ -136,6 +137,7 @@ export interface UpdateUserAccInfo {
   } | null;
 }
 
+/* 
 export interface RepairRequest {
   success: boolean;
   message: string;
@@ -156,22 +158,35 @@ export interface RepairRequest {
     issueDescription: string;
   };
 }
+*/
+
+export interface ProjectRequest {
+  _id: mongoose.Types.ObjectId;
+  subject: string;
+  subtitle: string;
+  message: string;
+  createdAt: Date;
+  status: string;
+  completedAt: Date | null;
+}
 
 export interface ProjectRequestDocument {
   userId: mongoose.Types.ObjectId;
   subject: string;
+  subtitle: string;
   message: string;
   createdAt: Date;
-  status: "pending" | "in_progress" | "completed" | "rejected";
+  status: "pending" | "inProgress" | "completed" | "rejected";
   completedAt: Date | null;
 }
 
-export interface ProjectRequest {
+export interface ProjectRequestActionState {
   success: boolean;
   message: string;
   error: string | null;
   formInput: {
     subject: string;
+    subtitle: string;
     message: string;
   };
 }

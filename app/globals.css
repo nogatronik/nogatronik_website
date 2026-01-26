@@ -156,6 +156,22 @@
     @apply transition-all duration-300 ease-in-out;
   }
 
+  .pending {
+    @apply bg-yellow-400/50;
+  }
+
+  .inProgress {
+    @apply bg-blue-400/50;
+  }
+
+  .completed {
+    @apply bg-green-500/50;
+  }
+
+  .rejected {
+    @apply bg-red-400/80;
+  }
+
   .absolute-center {
     @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
   }
@@ -247,11 +263,11 @@ html.lenis body {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+} */

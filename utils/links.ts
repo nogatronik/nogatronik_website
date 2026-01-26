@@ -9,6 +9,7 @@ import {
   FaShoppingCart,
   FaShippingFast,
   FaHandshake,
+  FaClipboard,
 } from "react-icons/fa";
 import { HiIdentification } from "react-icons/hi";
 import {
@@ -92,6 +93,12 @@ export const DASHBOARD_NAV: DashboardNavLinks[] = [
   },
   {
     type: "user",
+    text: "My Project Requests",
+    icon: FaClipboard,
+    href: "/user-account/project-requests",
+  },
+  {
+    type: "user",
     text: "My Orders",
     icon: RiShoppingBagFill,
     href: "/user-account/orders",
@@ -142,6 +149,13 @@ export const HELP_SERVICES_LINKS: NavLink[] = [
 // Engineering sub menu
 export const SUBNAV: EngSubNav[] = [
   {
+    href: "/engineering/projects",
+    image: "/contentSumImgs/repair_img_summary.svg",
+    description:
+      "Ready to make your ideas come to life, follow the progress, and enjoy the final result.",
+    text: "Projects",
+  },
+  {
     href: "/engineering/articles",
     image: "/contentSumImgs/article_img_summary.svg",
     description:
@@ -154,13 +168,6 @@ export const SUBNAV: EngSubNav[] = [
     description:
       "Ready to download, come and look at my manuals, blueprints, 3D parts, etc.",
     text: "Assets",
-  },
-  {
-    href: "/engineering/projects",
-    image: "/contentSumImgs/repair_img_summary.svg",
-    description:
-      "Ready to make your ideas come to life, follow the progress, and enjoy the final result.",
-    text: "Projects",
   },
 ];
 

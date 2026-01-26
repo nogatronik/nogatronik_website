@@ -26,6 +26,12 @@ const UserSchema = new Schema<UserDocument>(
       },
     },
     isOAuth: { type: Boolean, default: false },
+    role: {
+      type: String,
+      enum: ["user", "manager", "admin"],
+      default: "user",
+      index: true,
+    },
     name: {
       type: String,
       required: [true, "credentials - Name is required"],
@@ -51,7 +57,7 @@ const UserSchema = new Schema<UserDocument>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // VerificationToken schema
@@ -103,13 +109,19 @@ const ProjectReqSchema = new Schema<ProjectRequestDocument>(
       type: String,
       required: true,
     },
+    subtitle: {
+      type: String,
+      required: true,
+      maxlength: 50,
+      trim: true,
+    },
     message: {
       type: String,
       required: true,
     },
     status: {
       type: String,
-      enum: ["pending", "in_progress", "completed", "rejected"],
+      enum: ["pending", "inProgress", "completed", "rejected"],
       default: "pending",
     },
     completedAt: {
@@ -117,7 +129,7 @@ const ProjectReqSchema = new Schema<ProjectRequestDocument>(
       default: null,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const User = mongoose.models?.User || model<UserDocument>("User", UserSchema);
@@ -125,16 +137,17 @@ const VerificationToken =
   mongoose.models?.VerificationToken ||
   mongoose.model<VerificationTokenDocument>(
     "VerificationToken",
-    VerificationTokenSchema
+    VerificationTokenSchema,
   );
 const ResetPwdToken =
   mongoose.models?.ResetPwdToken ||
   mongoose.model<VerificationTokenDocument>(
     "ResetPwdToken",
-    ResetPwdTokenSchema
+    ResetPwdTokenSchema,
   );
 
-const ProjectRequest = mongoose.models?.ProjectRequest ||
+const ProjectRequest =
+  mongoose.models?.ProjectRequest ||
   mongoose.model<ProjectRequestDocument>("ProjectRequest", ProjectReqSchema);
 
 export { User, VerificationToken, ResetPwdToken, ProjectRequest };
