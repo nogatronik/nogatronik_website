@@ -39,7 +39,7 @@ export const SERVICES = [
     component: ReverseEng,
   },
   {
-    title: "Electronics Repairs",
+    title: "Electronics Repair",
     text: "We specialize in repairing electronic components for RC models, ensuring they operate at peak performance. From ESCs and receivers to servos and flight controllers, our expert team restores functionality and reliability, so you can get back to enjoying your hobby without interruption.",
     component: ElectronicRep,
   },

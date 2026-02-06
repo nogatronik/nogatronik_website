@@ -13,7 +13,7 @@ const Services = () => {
 
   return (
     <div className="flex flex-col gap-5 flex-1">
-      <h1>Our Services</h1>
+      {!selectedService && <h1>Our Services</h1>}
       <AnimatePresence mode="wait">
         {selectedService ? (
           <motion.div

@@ -21,25 +21,25 @@ const CtmRCKit = () => {
 
       <h3>What We Do</h3>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>Complete Airframe Construction:</strong> Careful assembly of
           fuselage, wings, tail, and control surfaces using precise techniques
           that ensure durability and performance.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Covering & Finishing:</strong> Application of high-quality
           covering film for strength, protection, and a polished appearance.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Electronics Installation:</strong> Expert setup of servos,
           motors, ESCs, batteries, and wiring for clean, reliable operation.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Radio System Integration:</strong> Binding and configuring{" "}
           <strong>Spektrum receivers</strong> and <strong>transmitters</strong>{" "}
           (or your preferred brand) for precise, interference-free control.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Final Setup & Testing:</strong> Control surface alignment,
           range testing, and balance adjustments so your aircraft is ready for
           its maiden flight.

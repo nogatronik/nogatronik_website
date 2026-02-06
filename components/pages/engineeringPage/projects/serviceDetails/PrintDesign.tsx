@@ -18,9 +18,11 @@ const PrintDesign = () => {
 
       <h3>What To Expect</h3>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>Professional, customized 3D models.</li>
-        <li>Prototypes ready for testing and iteration.</li>
-        <li>Strong and reliable final products.</li>
+        <li className="text-secondary">Professional, customized 3D models.</li>
+        <li className="text-secondary">
+          Prototypes ready for testing and iteration.
+        </li>
+        <li className="text-secondary">Strong and reliable final products.</li>
       </ul>
 
       <div className="relative">

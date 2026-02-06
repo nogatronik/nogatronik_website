@@ -20,30 +20,30 @@ const Laser = () => {
 
       <h3>What We Offer</h3>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>Personalized Product Engraving:</strong> Add a personal touch
           with custom engravings on wood, leather, or acrylic. Perfect for
           nameplates, signage, awards, or one-of-a-kind gifts that make every
           event memorable.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Decor & Artistic Pieces:</strong> Create stunning wall panels,
           ornaments, and wooden artwork that bring warmth and character to
           homes, shops, and offices—or even to sell as exclusive online décor.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Prototypes & Scale Models:</strong> Support your design and
           engineering projects with precisely cut components for accurate{" "}
           <strong>prototypes</strong>, <strong>scale models</strong>, and{" "}
           <strong>engineering mock-ups</strong>.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>DIY Assembly Kits:</strong> We design and cut fun, creative{" "}
           <strong>“Do It Yourself” kits</strong> for furniture, decorative
           pieces, and craft projects—perfect for hobbyists, makers, and gift
           shops.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Souvenirs & Custom Merchandising:</strong> Tailor-made
           promotional items and event souvenirs, engraved or cut with your logo
           or design, to strengthen branding and make a lasting impression.

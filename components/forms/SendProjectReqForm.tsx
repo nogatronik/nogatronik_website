@@ -96,7 +96,8 @@ const SendProjectReqForm = ({ subject }: Props) => {
       <div className="flex flex-col gap-2">
         <small className="text-xs text-muted-foreground">
           Note: The more details you provide, the better we can handle your
-          project.
+          project. After we read your request, you will be able to provide
+          images via email.
         </small>
 
         <textarea

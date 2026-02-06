@@ -26,15 +26,15 @@ const ReverseEng = () => {
         that can be used for:
       </p>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>Repair & Replication:</strong> Reproducing obsolete or broken
           components with accuracy.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Upgrades & Improvements:</strong> Enhancing the design for
           better performance and durability.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Customization:</strong> Tailoring parts to fit your specific
           project requirements.
         </li>
@@ -42,19 +42,19 @@ const ReverseEng = () => {
 
       <h3>Capabilities</h3>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>3D Modeling & CAD:</strong> High-precision digital
           reconstruction of mechanical parts.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Upgrades & Improvements:</strong> Recreation of circuit
           schematics, PCBs, and controllers.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Fabrication-Ready Files:</strong> Deliverables prepared for 3D
           printing, laser cutting, or CNC machining.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Prototype & Testing:</strong> Physical production and
           validation to ensure a perfect fit and reliable function.
         </li>
@@ -66,7 +66,7 @@ const ReverseEng = () => {
 
       <h2 className="m-auto">Ready to Start Your Project</h2>
       {session ? (
-        <SendProjectReqForm subject={"reverse engineering"} />
+        <SendProjectReqForm subject={"Reverse Engineering"} />
       ) : (
         <div className="m-auto flex flex-col gap-5 items-center">
           <p>In order to send a request, you need to login</p>

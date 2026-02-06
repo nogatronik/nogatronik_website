@@ -25,23 +25,23 @@ const Soldering = () => {
         that can be used for:
       </p>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>Component Soldering:</strong> Clean, accurate installation of
           new components on PCBs or assemblies.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Repairs & Rework:</strong> Expert restoration of broken, cold,
           or faulty solder joints to bring circuits back to life.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Fine-Pitch & Delicate Work:</strong> Precision soldering for
           microcontrollers, ICs, and sensitive electronic boards.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Custom Assemblies:</strong> Wiring harnesses, connectors, and
           modular builds, soldered to ensure strength and reliability.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Upgrades & Modifications:</strong> Add new features, replace
           damaged parts, or improve existing circuits.
         </li>

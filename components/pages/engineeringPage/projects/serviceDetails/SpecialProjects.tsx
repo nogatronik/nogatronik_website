@@ -23,24 +23,24 @@ const SpecialProjects = () => {
 
       <h3>What We Offer</h3>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>Custom Electronics Design:</strong> From circuit development
           to system integration, we design electronics built specifically for
           your needs.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Prototyping & Proof of Concept:</strong> Rapid development of
           working prototypes to validate and refine your idea.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Embedded Systems & Automation:</strong> Smart solutions with
           microcontrollers, sensors, and communication protocols.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Product Customization:</strong> Modify or enhance existing
           devices to match your requirements.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>End-to-End Project Support:</strong> From concept sketches and
           component sourcing to final testing and delivery.
         </li>

@@ -21,20 +21,20 @@ const ElectronicRep = () => {
 
       <h3>What We Repair</h3>
       <ul className="list-disc list-inside flex flex-col gap-2">
-        <li>
+        <li className="text-secondary">
           <strong>ESCs (Electronic Speed Controllers):</strong> Troubleshooting
           and repair of burned components, faulty solder joints, and power
           issues.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Receivers & Transmitters:</strong> Diagnosis and restoration
           of connectivity and signal problems.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Servos:</strong> Mechanical and electronic repair for precise
           and reliable control.
         </li>
-        <li>
+        <li className="text-secondary">
           <strong>Flight Controllers:</strong> Calibration, firmware
           reinstallation, and electronic component repairs.
         </li>

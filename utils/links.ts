@@ -156,18 +156,18 @@ export const SUBNAV: EngSubNav[] = [
     text: "Projects",
   },
   {
-    href: "/engineering/articles",
-    image: "/contentSumImgs/article_img_summary.svg",
-    description:
-      "Ready to learn and exchange ideas, come and look at my published articles.",
-    text: "Articles",
-  },
-  {
     href: "/engineering/assets",
     image: "/contentSumImgs/download_img_summary.svg",
     description:
       "Ready to download, come and look at my manuals, blueprints, 3D parts, etc.",
     text: "Assets",
+  },
+  {
+    href: "/engineering/articles",
+    image: "/contentSumImgs/article_img_summary.svg",
+    description:
+      "Ready to learn and exchange ideas, come and look at my published articles.",
+    text: "Articles",
   },
 ];
 
