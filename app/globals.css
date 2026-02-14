@@ -80,6 +80,10 @@
   textarea {
     @apply outline-none text-secondary font-[family-name:var(--font-roboto-slab)] resize-none placeholder:text-secondary/75 bg-transparent border-[1px] border-secondary/50;
   }
+
+  ul li {
+    @apply ml-5;
+  }
 }
 
 @layer components {

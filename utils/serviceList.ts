@@ -1,3 +1,4 @@
+import CompElectronics from "@/components/pages/engineeringPage/projects/serviceDetails/CompElectronics";
 import CtmRCKit from "@/components/pages/engineeringPage/projects/serviceDetails/CtmRCKit";
 import ElectronicRep from "@/components/pages/engineeringPage/projects/serviceDetails/ElectronicRep";
 import Laser from "@/components/pages/engineeringPage/projects/serviceDetails/Laser";
@@ -67,5 +68,10 @@ export const SERVICES = [
     title: "Laser Cut/Engraving",
     text: "Bring your ideas to life with precision engraving and cutting. From personalized gifts and artistic décor to professional prototypes, DIY kits, and custom souvenirs, we deliver creative, high-quality solutions for every project.",
     component: Laser,
+  },
+  {
+    title: "Advanced Computer & Electronics Services",
+    text: "We offer professional computer repair, electronic repair, and programming services for laptops, desktops, and embedded systems. Our approach is engineering-driven, precise, and focused on reliability, performance, and long-term solutions—not temporary fixes.",
+    component: CompElectronics,
   },
 ];

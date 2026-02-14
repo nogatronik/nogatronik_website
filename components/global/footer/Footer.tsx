@@ -89,7 +89,7 @@ const Footer = () => {
                   <small className="link-child anim-transition">
                     Contact Us:
                   </small>
-                  <small>+1(949)594-9408</small>
+                  <small>+1 (949) 594 - 9408</small>
                   <Link
                     href={"mailto:solutions@nogatronik.com"}
                     className="group"
