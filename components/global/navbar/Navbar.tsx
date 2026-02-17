@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -71,7 +71,12 @@ const Navbar = () => {
           {width! >= 769 && <MainNavLinks setComp={setAccSidebarContent} />}
         </header>
       </ContentLandAnim>
-      {width! <= 768 && <Sidebar setComp={setAccSidebarContent} />}
+      {width! <= 768 && (
+        <Suspense>
+          <Sidebar setComp={setAccSidebarContent} />
+        </Suspense>
+      )}
+
       <UserSidebar
         Component={AccSidebarContent}
         setComp={setAccSidebarContent}

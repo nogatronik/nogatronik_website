@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -40,9 +40,7 @@ const MainNavLinks = ({ setComp }: Props) => {
 
   return (
     <>
-      <motion.nav
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 "
-      >
+      <motion.nav className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-5 ">
         {NAVLINKS.map((link, index) => (
           <Link key={index} href={link.href}>
             <motion.span
@@ -70,7 +68,9 @@ const MainNavLinks = ({ setComp }: Props) => {
           </Link>
         ))}
       </motion.nav>
-      <ShoppingNavLinks setComp={setComp} />
+      <Suspense>
+        <ShoppingNavLinks setComp={setComp} />
+      </Suspense>
 
       <AnimatePresence mode="popLayout">
         {session && (

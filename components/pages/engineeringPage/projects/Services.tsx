@@ -9,8 +9,7 @@ import ServiceList from "./ServiceList";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { SERVICES } from "@/utils/serviceList";
 
-const Services = ({ callbackUrl }: { callbackUrl: string }) => {
-  console.log("CallbackUrl:", callbackUrl);
+const Services = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
