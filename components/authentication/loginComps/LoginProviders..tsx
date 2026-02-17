@@ -27,19 +27,19 @@ const LoginProviders = ({ callbackUrl }: { callbackUrl: string }) => {
           <FaGoogle className="icon " />
         </button>
         <button
-          className="group button bg-transparent hover:bg-accent disabled:opacity-50"
+          className="group button bg-transparent hover:bg-accent disabled:opacity-50 disabled:pointer-events-none"
           disabled
         >
           <FaFacebookF className="icon " />
         </button>
         <button
-          className="group button bg-transparent hover:bg-accent disabled:opacity-50"
+          className="group button bg-transparent hover:bg-accent disabled:opacity-50 disabled:pointer-events-none"
           disabled
         >
           <FaApple className="icon " />
         </button>
         <button
-          className="group button bg-transparent hover:bg-accent disabled:opacity-50"
+          className="group button bg-transparent hover:bg-accent disabled:opacity-50 disabled:pointer-events-none"
           disabled
         >
           <FaInstagram className="icon " />
