@@ -17,7 +17,7 @@ type SearchParams = Promise<{ callbackUrl?: string }>;
 const LoginPage = async ({ searchParams }: { searchParams: SearchParams }) => {
   const sp = await searchParams;
   const callbackUrl = sp.callbackUrl ?? "/";
-
+  console.log("LoginPage callbackUrl:", callbackUrl);
   return (
     <main className="min-h-[calc(100vh-105px)] w-full max-w-7xl mx-auto p-5 flex flex-col items-center justify-center">
       <ContentLandAnim style="w-full sm:w-[400px] flex flex-col gap-10">
