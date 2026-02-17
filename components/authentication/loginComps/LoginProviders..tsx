@@ -11,7 +11,7 @@ import { FaApple, FaFacebookF, FaGoogle, FaInstagram } from "react-icons/fa";
  *
  * @returns JSX
  */
-const LoginProviders = () => {
+const LoginProviders = ({ callbackUrl }: { callbackUrl: string }) => {
   return (
     <div className="relative flex flex-col items-center gap-5">
       <small>or sign-in using</small>
@@ -19,8 +19,7 @@ const LoginProviders = () => {
         <button
           onClick={() => {
             signIn("google", {
-              redirect: true,
-              callbackUrl: "/",
+              callbackUrl: callbackUrl,
             });
           }}
           className="group button bg-transparent hover:bg-accent"

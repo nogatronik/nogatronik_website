@@ -8,11 +8,11 @@ import { RiUserAddFill } from "react-icons/ri";
  *
  * @returns JSX
  */
-const SignupLink = () => {
+const SignupLink = ({ callbackUrl }: { callbackUrl: string }) => {
   return (
     <div className="flex items-center gap-2 mx-auto">
       <small>Don&apos;t have an account, create one</small>
-      <Link href={"/signup"}>
+      <Link href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
         <button className="button">
           <RiUserAddFill className="icon" />
           <small>register</small>

@@ -31,11 +31,7 @@ const ContentSummary = () => {
 
       <div className="flex flex-col md:grid grid-cols-2 grid-rows-2 gap-10">
         {CONTENT_SUMMARY.map((comp, index) => (
-          <ScrollIntoAnim
-            key={index}
-            ref={contentRef}
-            customStyle="flex-1 flex flex-col gap-5"
-          >
+          <ScrollIntoAnim key={index} customStyle="flex-1 flex flex-col gap-5">
             <div className="relative w-full h-[250px] ">
               <Image
                 src={comp.image}
@@ -48,7 +44,9 @@ const ContentSummary = () => {
                 className="drop-shadow-sm"
               />
             </div>
-            <p className="font-bold uppercase text-primary drop-shadow-md">{comp.title}</p>
+            <p className="font-bold uppercase text-primary drop-shadow-md">
+              {comp.title}
+            </p>
             <p> {comp.explanation} </p>
             <Link
               href={comp.link}

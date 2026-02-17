@@ -13,7 +13,11 @@ import { SignUpForm } from "@/components/forms/SignUpForm";
  *
  * @returns JSX
  */
-const SignupPage = () => {
+type SearchParams = Promise<{ callbackUrl?: string }>;
+const SignupPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const sp = await searchParams;
+  const callbackUrl = sp.callbackUrl ?? "/";
+
   return (
     <main className="min-h-[calc(100vh-105px)] w-full max-w-7xl mx-auto p-5 flex flex-col items-center justify-center">
       <ContentLandAnim style="w-full sm:w-[400px] flex flex-col gap-10">
@@ -36,7 +40,7 @@ const SignupPage = () => {
 
         <div className="flex items-center gap-2 mx-auto">
           <small>Already have an account</small>
-          <Link href={"/login"}>
+          <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
             <button className="button">
               <RiLoginBoxFill className="icon" />
               <small>login</small>

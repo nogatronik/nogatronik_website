@@ -12,7 +12,12 @@ import LoginForm from "@/components/forms/LoginForm";
  *
  * @returns JSX
  */
-const LoginPage = async () => {
+type SearchParams = Promise<{ callbackUrl?: string }>;
+
+const LoginPage = async ({ searchParams }: { searchParams: SearchParams }) => {
+  const sp = await searchParams;
+  const callbackUrl = sp.callbackUrl ?? "/";
+
   return (
     <main className="min-h-[calc(100vh-105px)] w-full max-w-7xl mx-auto p-5 flex flex-col items-center justify-center">
       <ContentLandAnim style="w-full sm:w-[400px] flex flex-col gap-10">
@@ -29,12 +34,12 @@ const LoginPage = async () => {
           />
         </div>
         <Suspense fallback={<p>Loading...</p>}>
-          <LoginForm />
+          <LoginForm callbackUrl={callbackUrl} />
         </Suspense>
         <hr className="border-t-2 border-secondary/50" />
 
-        <LoginProviders />
-        <SignupLink />
+        <LoginProviders callbackUrl={callbackUrl} />
+        <SignupLink callbackUrl={callbackUrl} />
       </ContentLandAnim>
     </main>
   );

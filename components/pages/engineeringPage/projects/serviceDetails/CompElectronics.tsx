@@ -1,14 +1,21 @@
 import SendProjectReqForm from "@/components/forms/SendProjectReqForm";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import React from "react";
 import { RiLoginBoxFill } from "react-icons/ri";
 
 const CompElectronics = () => {
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const qs = searchParams.toString();
+  const callbackUrl = qs ? `${pathname}?${qs}` : pathname;
+  console.log("callbackUrl:", callbackUrl);
   return (
     <div className="flex flex-col gap-5">
-      <h3>Laser Cut/Engraving</h3>
+      <h3>Advanced Computer & Electronics</h3>
       <p>
         At Nogatronik Engineering, we deliver{" "}
         <strong>engineering-level diagnostics</strong> grounded in precision—not
@@ -114,7 +121,10 @@ const CompElectronics = () => {
       ) : (
         <div className="m-auto flex flex-col gap-5 items-center">
           <p>In order to send a request, you need to login</p>
-          <Link href={"/login"} className="button">
+          <Link
+            href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+            className="button"
+          >
             <RiLoginBoxFill className="icon" />
             <small>Login</small>
           </Link>

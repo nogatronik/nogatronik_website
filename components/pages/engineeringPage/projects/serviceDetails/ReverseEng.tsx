@@ -4,9 +4,15 @@ import { useSession } from "next-auth/react";
 import SendProjectReqForm from "@/components/forms/SendProjectReqForm";
 import Link from "next/link";
 import { RiLoginBoxFill } from "react-icons/ri";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const ReverseEng = () => {
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const qs = searchParams.toString();
+  const callbackUrl = qs ? `${pathname}?${qs}` : pathname;
   return (
     <div className="flex flex-col gap-5">
       <h3>Reverse Engineering</h3>
@@ -70,7 +76,10 @@ const ReverseEng = () => {
       ) : (
         <div className="m-auto flex flex-col gap-5 items-center">
           <p>In order to send a request, you need to login</p>
-          <Link href={"/login"} className="button">
+          <Link
+            href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+            className="button"
+          >
             <RiLoginBoxFill className="icon" />
             <small>Login</small>
           </Link>

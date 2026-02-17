@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
         if (!user) throw new Error("Wrong Email");
         const passwordMatch = await bcrypt.compare(
           credentials!.password,
-          user.password
+          user.password,
         );
         if (!passwordMatch) throw new Error("Wrong Password");
 
@@ -50,25 +50,30 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       try {
         await connectDB();
-        // Handles when user uses google provider
-        if (account?.provider === "google") {
-          let existingUser = await User.findOne({ email: user.email });
 
-          // if user doesn't exist, create a record on db
+        if (account?.provider === "google") {
+          const existingUser = await User.findOne({ email: user.email });
+
+          // If user doesn't exist, create them
           if (!existingUser) {
-            existingUser = await User.create({
+            await User.create({
               email: user.email,
               name: user.name,
               image: user.image,
               isOAuth: true,
               emailVerified: true,
             });
+            return true;
           }
 
-          // returning true and successful authentication flow
+          // If user exists and is OAuth, allow sign-in
+          if (existingUser.isOAuth) {
+            return true;
+          }
+
+          // If user exists but was created via credentials, block google sign-in (optional rule)
           return "/login?error=EmailExists";
         }
-        // Handles when user uses other providers (to be determined)
 
         return true;
       } catch (e) {

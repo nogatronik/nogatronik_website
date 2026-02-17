@@ -1,15 +1,45 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import { IoIosArrowBack } from "react-icons/io";
 import { AnimatePresence, motion } from "framer-motion";
-import { SelectedService } from "@/lib/types";
+import { SelectedService, Services as ServiceType } from "@/lib/types";
 import ServiceList from "./ServiceList";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { SERVICES } from "@/utils/serviceList";
 
 const Services = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const slugFromUrl = searchParams.get("service");
+
+  const serviceBySlug = useMemo(() => {
+    return SERVICES.reduce<Record<string, ServiceType>>((acc, s) => {
+      acc[s.slug] = s;
+      return acc;
+    }, {});
+  }, []);
+
   const [selectedService, setSelectedService] =
     useState<SelectedService | null>(null);
+
+  useEffect(() => {
+    if (!slugFromUrl) {
+      setSelectedService(null);
+      return;
+    }
+
+    const item = serviceBySlug[slugFromUrl];
+    if (!item) return;
+
+    setSelectedService({
+      title: item.title,
+      slug: item.slug,
+      component: item.component,
+    });
+  }, [slugFromUrl, serviceBySlug]);
 
   return (
     <div className="flex flex-col gap-5 flex-1">
@@ -23,7 +53,15 @@ const Services = () => {
             className="flex flex-col gap-5"
           >
             <button
-              onClick={() => setSelectedService(null)}
+              onClick={() => {
+                setSelectedService(null);
+                const params = new URLSearchParams(searchParams.toString());
+                params.delete("service");
+                const qs = params.toString();
+                router.push(qs ? `${pathname}?${qs}` : pathname, {
+                  scroll: false,
+                });
+              }}
               className="group flex gap-2 items-center w-fit cursor-pointer"
             >
               <IoIosArrowBack className="icon link-child anim-transition group-hover:-translate-x-1" />

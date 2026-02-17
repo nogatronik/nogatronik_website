@@ -17,11 +17,12 @@ import { toast } from "sonner";
  *
  * @returns - JSX
  */
-const LoginForm = () => {
+const LoginForm = ({ callbackUrl }: { callbackUrl: string }) => {
   // Variables
   const searchParams = useSearchParams();
   const verified = searchParams.get("verified");
   const errorCallback = searchParams.get("error");
+
   // UseState
   const [isPending, setIsPending] = useState(false);
   /**
@@ -45,14 +46,18 @@ const LoginForm = () => {
 
     // Handling possible errors received from signIn
     if (res?.error) {
-      if (res.status.toString().startsWith("4"))
+      if (res.status.toString().startsWith("4")) {
+        setIsPending(false);
         toast.error("wrong email or password");
-      if (res.status.toString().startsWith("5"))
+      }
+      if (res.status.toString().startsWith("5")) {
+        setIsPending(false);
         toast.error("there was a problem with the server, try again");
+      }
     }
     if (res?.ok) {
       setIsPending(false);
-      redirect("/");
+      redirect(callbackUrl);
     }
   };
 

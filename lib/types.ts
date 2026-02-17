@@ -112,9 +112,18 @@ export interface HomeAboutLink {
   component: React.ComponentType;
   key: string;
 }
+
+export interface Services {
+  title: string;
+  text: string;
+  component: React.ComponentType;
+  slug: string;
+}
+
 export interface SelectedService {
   component: React.ComponentType;
   title: string;
+  slug: string;
 }
 
 export interface UpdateUserInfo {

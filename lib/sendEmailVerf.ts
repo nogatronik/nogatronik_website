@@ -20,7 +20,7 @@ const getVerificationEmailHtml = async ({
 }) => {
   try {
     const res = await fetch(
-      `${process.env.VERIFICATION_URL_DOMAIN}/emailTemplates/verification_email.html`
+      `${process.env.VERIFICATION_URL_DOMAIN}/emailTemplates/verification_email.html`,
     );
 
     if (!res.ok) {
@@ -53,7 +53,7 @@ const getVerificationEmailHtml = async ({
 export async function sendVerificationEmail(
   name: string,
   email: string,
-  token: string
+  token: string,
 ) {
   try {
     // Variables
@@ -63,6 +63,9 @@ export async function sendVerificationEmail(
       host: "smtp.mail.us-east-1.awsapps.com",
       port: 465,
       secure: true,
+      // tls: {
+      //   rejectUnauthorized: false,
+      // },
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,

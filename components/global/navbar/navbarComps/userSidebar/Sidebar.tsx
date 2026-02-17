@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import useScreenWidth from "@/hooks/useScreenWidth";
 
@@ -30,6 +30,10 @@ const Sidebar = ({ setComp }: Props) => {
   const [open, setOpen] = useState(false);
   const width = useScreenWidth();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const qs = searchParams.toString();
+  const callbackUrl = qs ? `${pathname}?${qs}` : pathname;
   const isActive = (href: string) => {
     return pathname.split("/").pop() === href.split("/").pop();
   };
@@ -122,7 +126,7 @@ const Sidebar = ({ setComp }: Props) => {
                             {userOption.text}
                           </small>
                         </button>
-                      )
+                      ),
                     )}
                   </ul>
                 )}
@@ -139,7 +143,7 @@ const Sidebar = ({ setComp }: Props) => {
               </button>
             ) : (
               <Link
-                href={"/login"}
+                href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}
                 className="button absolute bottom-10 right-5"
               >
                 <RiLoginBoxFill className="icon" />

@@ -36,42 +36,52 @@ export const REPAIR_STEPS: RepairStep[] = [
 export const SERVICES = [
   {
     title: "Reverse Engineering",
-    text: "We specialize in recreating discontinued or unavailable parts for aeromodelling and electronics. From broken brackets to custom circuits, we transform physical components or incomplete documentation into precise digital designs, ready for repair, replication, or improvement through Electro-Mechanical design, 3D printing, laser cutting, or CNC fabrication.",
+    text: "We recreate discontinued or unavailable mechanical and electronic components. Using precise CAD modeling, circuit redesign, and fabrication-ready outputs, we transform physical parts or partial documentation into accurate digital designs. The result is a reliable component ready for repair, replication, or improvement.",
+    slug: "reverse-engineering",
     component: ReverseEng,
   },
   {
     title: "Electronics Repair",
-    text: "We specialize in repairing electronic components for RC models, ensuring they operate at peak performance. From ESCs and receivers to servos and flight controllers, our expert team restores functionality and reliability, so you can get back to enjoying your hobby without interruption.",
+    text: "We repair electronic components for RC models and specialized systems. Our service includes diagnostics, component-level repair, calibration, and functional testing. The result is restored performance and dependable operation.",
+    slug: "electronics-repair",
     component: ElectronicRep,
   },
   {
     title: "Special Projects",
-    text: "Have a unique or custom electronic project in mind? We bring your ideas to life, offering tailored solutions and expert craftsmanship for your special electronic projects.",
+    text: "We develop custom electronic solutions for unique or non-standard requirements. Our work includes circuit design, prototyping, embedded systems integration, and system refinement. The result is a fully engineered solution tailored to your specific objectives.",
+    slug: "special-projects",
     component: SpecialProjects,
   },
   {
     title: "Custom RC Kit Assembly",
-    text: "We offer a specialized service for RC aircraft enthusiasts. If you have a kit with all the balsa parts ready to assemble, we handle the entire build process for you. From constructing the fuselage and wings to applying the covering film and fine-tuning all electronics—servos, Spektrum receivers, and transmitters—we ensure your model is flight-ready right out of the workshop.",
+    text: "We provide professional assembly services for RC aircraft kits. Our process includes airframe construction, electronics installation, radio configuration, and final calibration. The result is a flight-ready model built for precision and reliability.",
+    slug: "custom-rc-kit-assembly",
     component: CtmRCKit,
   },
   {
     title: "Soldering",
-    text: "We offer professional soldering solutions for all your electronic needs. Whether you need precise soldering for new components or expert repair of broken or faulty connections, our services ensure secure, long-lasting results. From delicate circuits to complex assemblies, we guarantee top-quality workmanship and reliability.",
+    text: "We offer professional soldering for electronic assemblies and repairs. Our service includes component installation, rework, micro-soldering, and custom wiring builds. The result is clean, secure connections built for long-term durability.",
+    slug: "soldering",
     component: Soldering,
   },
   {
     title: "3D Print Design",
-    text: "Whether you need functional prototypes, replacement parts, or custom creations, our team specializes in designing and producing high-quality 3D printed components tailored to your needs.",
+    text: "We design and produce custom 3D printed components for prototypes and functional applications. Our process includes precision CAD modeling, material selection, and optimized print preparation. The result is a strong, accurate part ready for real-world use.",
+    slug: "3d-print-design",
     component: PrintDesign,
   },
   {
     title: "Laser Cut/Engraving",
-    text: "Bring your ideas to life with precision engraving and cutting. From personalized gifts and artistic décor to professional prototypes, DIY kits, and custom souvenirs, we deliver creative, high-quality solutions for every project.",
+    text: "We provide precision laser cutting and engraving for functional and creative applications. Our service includes material preparation, detailed design work, and clean fabrication across wood, acrylic, and similar materials. The result is a high-quality piece produced with accuracy and consistency.",
+    slug: "laser-cut-engraving",
     component: Laser,
   },
   {
-    title: "Advanced Computer & Electronics Services",
-    text: "We offer professional computer repair, electronic repair, and programming services for laptops, desktops, and embedded systems. Our approach is engineering-driven, precise, and focused on reliability, performance, and long-term solutions—not temporary fixes.",
+    title: "Advanced Computer & Electronics",
+    text: "We provide engineering-level computer repair, electronic diagnostics, and programming services. Our work includes hardware troubleshooting, board-level repair, firmware configuration, and system optimization. The result is a stable, performance-focused solution designed for long-term reliability.",
+    slug: "advanced-computer-electronics",
     component: CompElectronics,
   },
 ];
+
+export type ServiceSlug = (typeof SERVICES)[number]["slug"];

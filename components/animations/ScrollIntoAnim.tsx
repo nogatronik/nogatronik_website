@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { forwardRef } from "react";
 
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Props extends React.InputHTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -23,39 +23,23 @@ interface Props extends React.InputHTMLAttributes<HTMLDivElement> {
  */
 const ScrollIntoAnim = forwardRef<HTMLDivElement, Props>(
   ({ customStyle, id, children }, ref) => {
-    // Variables
-    const innerRef = useRef<HTMLDivElement>(null);
-
-    // Handles the assignation of the container's ref to be animated
-    useEffect(() => {
-      if (!ref) return;
-      if (typeof ref === "function") {
-        ref(innerRef.current);
-      } else {
-        (ref as React.RefObject<HTMLDivElement | null>).current =
-          innerRef.current;
-      }
-    }, [ref]);
-
-    const isInView = useInView(innerRef, { amount: 0.25 });
     return (
       <motion.div
         id={id}
-        initial={{ opacity: 0, y: 100 }}
-        animate={
-          isInView && {
-            opacity: 1,
-            y: 0,
-            transition: { type: "spring", stiffness: 150, damping: 12 },
-          }
-        }
-        ref={innerRef}
+        ref={ref}
         className={customStyle}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          transition: { type: "spring", stiffness: 150, damping: 12 },
+        }}
+        viewport={{ amount: 0.25, once: true }}
       >
         {children}
       </motion.div>
     );
-  }
+  },
 );
 
 ScrollIntoAnim.displayName = "ScrollIntoView";

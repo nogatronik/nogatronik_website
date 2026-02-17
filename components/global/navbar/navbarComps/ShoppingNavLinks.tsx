@@ -6,6 +6,7 @@ import { RiLoginBoxFill } from "react-icons/ri";
 import { SIGNED_USER_SIDE_PANEL_BTNS } from "@/utils/links";
 
 import { useSession } from "next-auth/react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface Props {
   setComp: React.Dispatch<
@@ -23,6 +24,12 @@ interface Props {
 const ShoppingNavLinks = ({ setComp }: Props) => {
   // Variables
   const { data: session } = useSession();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const qs = searchParams.toString();
+  const callbackUrl = qs ? `${pathname}?${qs}` : pathname;
+
   const textVariants = {
     hidden: { width: 0, opacity: 0 },
     visible: { width: "auto", opacity: 1 },
@@ -40,7 +47,7 @@ const ShoppingNavLinks = ({ setComp }: Props) => {
     // else return only the options where auth is not required
     else {
       return SIGNED_USER_SIDE_PANEL_BTNS.map((option) =>
-        !option.auth ? option : null
+        !option.auth ? option : null,
       ).filter(Boolean);
     }
   };
@@ -55,7 +62,7 @@ const ShoppingNavLinks = ({ setComp }: Props) => {
       className="flex-1 flex justify-end gap-5"
     >
       {!session && (
-        <Link href={"/login"}>
+        <Link href={`/login?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
           <motion.span
             className="group flex items-center gap-1 cursor-pointer"
             initial="hidden"
@@ -96,7 +103,7 @@ const ShoppingNavLinks = ({ setComp }: Props) => {
                 {link.text}
               </motion.small>
             </motion.button>
-          )
+          ),
       )}
     </motion.div>
   );

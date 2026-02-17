@@ -16,7 +16,7 @@ const MAMention = () => {
         He was born in La Plata, Huila, on July 5
         <span className="align-super text-xs">th</span>, 1935, and left this
         world on September 3<span className="align-super text-xs">rd</span>,
-        2022.
+        2020.
         <br />
         <br />
         Don Marcos was a man of profound kindness, wisdom, and generosity, whose

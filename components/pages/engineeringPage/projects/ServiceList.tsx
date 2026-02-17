@@ -4,12 +4,16 @@ import { motion } from "framer-motion";
 import { SERVICES } from "@/utils/serviceList";
 import { SelectedService } from "@/lib/types";
 import { IoIosArrowForward } from "react-icons/io";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface Props {
   setSelectedService: React.Dispatch<SelectedService | null>;
 }
 
 const ServiceList = ({ setSelectedService }: Props) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   return (
     <motion.div
       key="service-list"
@@ -26,12 +30,18 @@ const ServiceList = ({ setSelectedService }: Props) => {
           <h3 className="text-secondary">{item.title}</h3>
           <p>{item.text}</p>
           <button
-            onClick={() =>
+            onClick={() => {
               setSelectedService({
                 component: item.component,
                 title: item.title,
-              })
-            }
+                slug: item.slug,
+              });
+              const params = new URLSearchParams(searchParams.toString());
+              params.set("service", item.slug);
+              router.push(`${pathname}?${params.toString()}`, {
+                scroll: false,
+              });
+            }}
             className="group cursor-pointer flex gap-2 items-center w-fit mt-auto"
           >
             <small className="link-child anim-transition">Learn more</small>
