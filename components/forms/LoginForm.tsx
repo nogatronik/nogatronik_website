@@ -1,7 +1,7 @@
 "use client";
 
-import { signIn } from "@/node_modules/next-auth/react";
-import { redirect, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { RiLoginBoxFill } from "react-icons/ri";
@@ -22,6 +22,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl: string }) => {
   const searchParams = useSearchParams();
   const verified = searchParams.get("verified");
   const errorCallback = searchParams.get("error");
+  const router = useRouter();
 
   // UseState
   const [isPending, setIsPending] = useState(false);
@@ -57,7 +58,7 @@ const LoginForm = ({ callbackUrl }: { callbackUrl: string }) => {
     }
     if (res?.ok) {
       setIsPending(false);
-      redirect(callbackUrl);
+      router.push(callbackUrl);
     }
   };
 

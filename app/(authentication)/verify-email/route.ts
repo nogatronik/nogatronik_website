@@ -22,7 +22,7 @@ export async function GET(req: Request) {
     const record = await VerificationToken.findOne({ token });
 
     if (!record || record.expires < new Date()) {
-      return NextResponse.redirect("/login"); // Invalid or expired token
+      return NextResponse.redirect(new URL("/login", req.url)); // Invalid or expired token
     }
 
     // Mark the user's email as verified
@@ -36,7 +36,7 @@ export async function GET(req: Request) {
   } catch (e) {
     console.error("[EMAIL_VERIFY_ERROR]", e);
     return NextResponse.redirect(
-      new URL("/login?error=verification-failed", req.url)
+      new URL("/login?error=verification-failed", req.url),
     );
   }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { signIn } from "@/node_modules/next-auth/react";
+import { signIn } from "next-auth/react";
 
 import { FaApple, FaFacebookF, FaGoogle, FaInstagram } from "react-icons/fa";
 

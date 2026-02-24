@@ -2,7 +2,7 @@ import Image from "next/image";
 import React, { Suspense } from "react";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
-import LoginProviders from "@/components/authentication/loginComps/LoginProviders.";
+import LoginProviders from "@/components/authentication/loginComps/LoginProviders";
 import SignupLink from "@/components/authentication/loginComps/SignupLink";
 import LoginForm from "@/components/forms/LoginForm";
 

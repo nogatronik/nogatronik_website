@@ -141,10 +141,7 @@ const VerificationToken =
   );
 const ResetPwdToken =
   mongoose.models?.ResetPwdToken ||
-  mongoose.model<VerificationTokenDocument>(
-    "ResetPwdToken",
-    ResetPwdTokenSchema,
-  );
+  mongoose.model<ResetPwdTokenDocument>("ResetPwdToken", ResetPwdTokenSchema);
 
 const ProjectRequest =
   mongoose.models?.ProjectRequest ||

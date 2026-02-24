@@ -16,7 +16,7 @@ const getResetPwdEmailHTML = async ({
 }) => {
   try {
     const res = await fetch(
-      `${process.env.VERIFICATION_URL_DOMAIN}/emailTemplates/forgot_password.html`
+      `${process.env.VERIFICATION_URL_DOMAIN}/emailTemplates/forgot_password.html`,
     );
 
     if (!res.ok) {
@@ -44,6 +44,9 @@ const sendEmail = async (name: string, email: string, token: string) => {
       host: "smtp.mail.us-east-1.awsapps.com",
       port: 465,
       secure: true,
+      tls: {
+        rejectUnauthorized: false,
+      },
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,

@@ -16,9 +16,9 @@ export async function sendProjReqEmail(
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
-      // tls: {
-      //   rejectUnauthorized: false,
-      // },
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
     const mailOptions = {
       from: '"Nogatronik" <solutions@nogatronik.com>',
