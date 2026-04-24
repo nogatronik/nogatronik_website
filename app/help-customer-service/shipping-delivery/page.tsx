@@ -1,6 +1,7 @@
 import React from "react";
 
 import ContentLandAnim from "@/components/animations/ContentLandAnim";
+import Link from "next/link";
 
 const page = () => {
   return (
@@ -56,8 +57,16 @@ const page = () => {
               arrangements.
             </p>
             <p>
-              In-person delivery/pickup is available at PMVAC Field on Sunday
-              mornings. Pickup Address: McCarty Rd., Eastvale, CA 92880
+              In-person delivery/pickup is available at{" "}
+              <Link
+                href="https://www.pvmac.com/"
+                className="underline"
+                target="_blank"
+              >
+                PVMAC Field
+              </Link>{" "}
+              on Sunday mornings. Pickup Address: McCarty Rd., Eastvale, CA
+              92880
             </p>
           </li>
           <li className="font-semibold">
