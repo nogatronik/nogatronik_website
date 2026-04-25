@@ -29,7 +29,7 @@ const TextComp = () => {
         style="text-3xl md:text-6xl"
       />
       <AnimatedText
-        text="Where science, technology, and innovation are invoked to inspire the future"
+        text="Where science, technology, and innovation are invoked to inspire the future."
         el="h2"
         style={`text-lg md:text-5xl text-secondary ${
           width! <= 767 && "text-center"
